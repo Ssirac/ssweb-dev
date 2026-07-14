@@ -20,12 +20,32 @@ export function Terminal() {
   useEffect(() => { setHistory([{ out: banner }]); /* eslint-disable-next-line */ }, [lang]);
   useEffect(() => { bodyRef.current?.scrollTo(0, bodyRef.current.scrollHeight); }, [history]);
 
+  // Azerbaijani (and a few English) aliases → canonical command.
+  const ALIASES: Record<string, string> = {
+    kömək: "help", komek: "help", yardım: "help", yardim: "help",
+    haqqında: "about", haqqinda: "about", haqqimda: "about", mən: "about",
+    bacarıqlar: "skills", bacariqlar: "skills",
+    layihələr: "projects", layiheler: "projects", işlər: "projects", isler: "projects",
+    sosial: "socials", "sosial şəbəkələr": "socials",
+    əlaqə: "contact", elaqe: "contact",
+    kimsən: "whoami", kimsen: "whoami", "kim sən": "whoami",
+    təmizlə: "clear", temizle: "clear", cls: "clear",
+    salam: "hi", "salam əleyküm": "hi", salamlar: "hi", hello: "hi", hey: "hi", hi: "hi",
+  };
+
   const run = (raw: string): string[] => {
-    const cmd = raw.trim().toLowerCase();
+    const input = raw.trim().toLowerCase();
+    const cmd = ALIASES[input] ?? input;
     switch (cmd) {
       case "": return [];
+      case "hi":
+        return az
+          ? ["Salam! 👋 `help` yazıb nə edə biləcəyimə bax."]
+          : ["Hey there! 👋 Type `help` to see what I can do."];
       case "help":
-        return ["Available: help, about, skills, projects, socials, contact, whoami, clear"];
+        return az
+          ? ["Əmrlər: help, about, skills, projects, socials, contact, whoami, clear", "(Azərbaycanca da yaza bilərsən: kömək, haqqında, layihələr, əlaqə…)"]
+          : ["Available: help, about, skills, projects, socials, contact, whoami, clear"];
       case "whoami":
         return [`${PROFILE.name} — Junior Frontend Developer (Azerbaijan)`];
       case "about":
