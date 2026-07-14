@@ -6,8 +6,9 @@ const W = 640;
 const H = 180;
 const GROUND = H - 28;
 const PLAYER = { x: 60, size: 32 };
-const GRAVITY = 0.7;
-const JUMP = -11.5;
+const GRAVITY = 0.6;
+const JUMP = -11;
+const BASE_SPEED = 3.1;
 
 const rgb = (name: string) =>
   `rgb(${getComputedStyle(document.documentElement).getPropertyValue(name).trim()})`;
@@ -23,10 +24,11 @@ export function RunnerGame() {
   const y = useRef(GROUND - PLAYER.size);
   const vy = useRef(0);
   const obstacles = useRef<Obs[]>([]);
-  const speed = useRef(5);
+  const speed = useRef(BASE_SPEED);
   const spawn = useRef(0);
   const dist = useRef(0);
   const running = useRef(false);
+  const last = useRef(0);
 
   const [status, setStatus] = useState<"idle" | "running" | "over">("idle");
   const [score, setScore] = useState(0);
@@ -76,24 +78,30 @@ export function RunnerGame() {
     ctx.fillText(String(frameScore).padStart(5, "0"), W - 14, 22);
   }, []);
 
-  const loop = useCallback(() => {
+  const loop = useCallback((now: number) => {
     if (!running.current) return;
+    // delta time normalised to 60fps → same speed on 60/120/144Hz screens
+    if (!last.current) last.current = now;
+    let dt = (now - last.current) / 16.6667;
+    last.current = now;
+    if (dt > 3) dt = 3; // clamp after tab switch / stutter
+
     // physics
-    vy.current += GRAVITY;
-    y.current = Math.min(GROUND - PLAYER.size, y.current + vy.current);
-    dist.current += speed.current;
-    speed.current = 5 + dist.current / 2200;
-    const sc = Math.floor(dist.current / 20);
+    vy.current += GRAVITY * dt;
+    y.current = Math.min(GROUND - PLAYER.size, y.current + vy.current * dt);
+    dist.current += speed.current * dt;
+    speed.current = BASE_SPEED + dist.current / 4500; // gentle ramp
+    const sc = Math.floor(dist.current / 22);
     setScore(sc);
 
     // spawn obstacles
-    spawn.current -= speed.current;
+    spawn.current -= speed.current * dt;
     if (spawn.current <= 0) {
-      const h = 22 + Math.random() * 26;
+      const h = 22 + Math.random() * 24;
       obstacles.current.push({ x: W + 10, w: 16 + Math.random() * 14, h });
-      spawn.current = 260 + Math.random() * 240;
+      spawn.current = 300 + Math.random() * 260;
     }
-    obstacles.current.forEach((o) => (o.x -= speed.current));
+    obstacles.current.forEach((o) => (o.x -= speed.current * dt));
     obstacles.current = obstacles.current.filter((o) => o.x + o.w > -10);
 
     // collision (AABB with small forgiveness)
@@ -127,9 +135,10 @@ export function RunnerGame() {
     y.current = GROUND - PLAYER.size;
     vy.current = 0;
     obstacles.current = [];
-    speed.current = 5;
+    speed.current = BASE_SPEED;
     spawn.current = 120;
     dist.current = 0;
+    last.current = 0;
     setScore(0);
     running.current = true;
     setStatus("running");
