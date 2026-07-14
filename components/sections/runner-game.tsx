@@ -29,12 +29,20 @@ export function RunnerGame() {
   const dist = useRef(0);
   const running = useRef(false);
   const last = useRef(0);
+  const logo = useRef<HTMLImageElement | null>(null);
 
   const [status, setStatus] = useState<"idle" | "running" | "over">("idle");
   const [score, setScore] = useState(0);
   const [high, setHigh] = useState(0);
 
   useEffect(() => { setHigh(Number(localStorage.getItem("runner-high") || 0)); }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/sslogo.jpg";
+    img.onload = () => { logo.current = img; if (!running.current) draw(0); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const draw = useCallback((frameScore: number) => {
     const ctx = canvasRef.current?.getContext("2d");
@@ -53,15 +61,25 @@ export function RunnerGame() {
     }
     ctx.globalAlpha = 1;
 
-    // player — a little branded creature
+    // player — the SS logo (clipped to a circle)
     const py = y.current;
-    ctx.fillStyle = rgb("--c-primary");
-    ctx.beginPath();
-    (ctx as CanvasRenderingContext2D).roundRect(PLAYER.x, py, PLAYER.size, PLAYER.size, 7);
-    ctx.fill();
-    // eyes
-    ctx.fillStyle = rgb("--c-background");
-    ctx.beginPath(); ctx.arc(PLAYER.x + 22, py + 12, 3, 0, Math.PI * 2); ctx.fill();
+    const cx = PLAYER.x + PLAYER.size / 2;
+    const cy = py + PLAYER.size / 2;
+    const r = PLAYER.size / 2;
+    if (logo.current) {
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
+      ctx.drawImage(logo.current, PLAYER.x, py, PLAYER.size, PLAYER.size);
+      ctx.restore();
+      ctx.strokeStyle = rgb("--c-primary");
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+    } else {
+      ctx.fillStyle = rgb("--c-primary");
+      ctx.beginPath();
+      (ctx as CanvasRenderingContext2D).roundRect(PLAYER.x, py, PLAYER.size, PLAYER.size, 7);
+      ctx.fill();
+    }
 
     // obstacles
     ctx.fillStyle = rgb("--c-secondary");

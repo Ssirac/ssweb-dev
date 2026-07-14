@@ -21,6 +21,7 @@ export function SnakeGame() {
   const nextDir = useRef<Pt>({ x: 1, y: 0 });
   const food = useRef<Pt>({ x: 10, y: 9 });
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const logo = useRef<HTMLImageElement | null>(null);
 
   const [status, setStatus] = useState<"idle" | "running" | "over">("idle");
   const [score, setScore] = useState(0);
@@ -29,6 +30,13 @@ export function SnakeGame() {
   useEffect(() => {
     const h = Number(localStorage.getItem("snake-high") || 0);
     setHigh(h);
+  }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/sslogo.jpg";
+    img.onload = () => { logo.current = img; draw(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const placeFood = useCallback(() => {
@@ -56,12 +64,22 @@ export function SnakeGame() {
     ctx.beginPath();
     ctx.arc(f.x * CELL + CELL / 2, f.y * CELL + CELL / 2, CELL / 2 - 3, 0, Math.PI * 2);
     ctx.fill();
-    // snake
+    // snake — head is the SS logo, body is brand blocks
     const primary = cssVar("--c-primary");
     const secondary = cssVar("--c-secondary");
     snake.current.forEach((s, i) => {
+      if (i === 0 && logo.current) {
+        const cx = s.x * CELL + CELL / 2;
+        const cy = s.y * CELL + CELL / 2;
+        const r = CELL / 2 - 1;
+        ctx.save();
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
+        ctx.drawImage(logo.current, s.x * CELL, s.y * CELL, CELL, CELL);
+        ctx.restore();
+        return;
+      }
       ctx.fillStyle = i === 0 ? primary : secondary;
-      const pad = i === 0 ? 1 : 2;
+      const pad = 2;
       ctx.beginPath();
       ctx.roundRect(s.x * CELL + pad, s.y * CELL + pad, CELL - pad * 2, CELL - pad * 2, 5);
       ctx.fill();
