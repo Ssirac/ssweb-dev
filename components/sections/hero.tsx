@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Download, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { Logo } from "../logo";
 import { Magnetic } from "../ui/magnetic";
 import { CodeRain } from "../background/code-rain";
@@ -111,19 +111,9 @@ export function Hero() {
             </Link>
           </Magnetic>
           <Magnetic>
-            <a
-              href="/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-ink/12 px-6 py-3 font-medium text-ink transition hover:border-primary/50 hover:text-primary"
-            >
-              <Download size={17} /> {t.cta.downloadCV}
-            </a>
-          </Magnetic>
-          <Magnetic>
             <Link
               href="/contact"
-              className="flex items-center gap-2 rounded-full px-5 py-3 font-medium text-muted transition hover:text-ink"
+              className="flex items-center gap-2 rounded-full border border-ink/12 px-6 py-3 font-medium text-ink transition hover:border-primary/50 hover:text-primary"
             >
               <Mail size={17} /> {t.cta.contactMe}
             </Link>

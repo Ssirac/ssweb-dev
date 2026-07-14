@@ -78,6 +78,13 @@ body {
 .section-anchor { scroll-margin-top: 90px; }
 
 @keyframes code-scroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+@keyframes card-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*="card-spin"] { animation: none !important; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

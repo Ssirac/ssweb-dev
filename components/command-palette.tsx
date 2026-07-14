@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { AnimatePresence, motion } from "framer-motion";
-import { Home, User, Wrench, FolderGit2, Github, Mail, Download } from "lucide-react";
+import { Home, User, Wrench, FolderGit2, Github, Mail } from "lucide-react";
 import { NAV_LINKS, PROFILE } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
@@ -69,12 +69,6 @@ export function CommandPalette() {
                   })}
                 </Command.Group>
                 <Command.Group heading={t.cmd.actions} className="px-2 py-1 text-xs text-muted">
-                  <Command.Item
-                    onSelect={() => { window.open("/cv.pdf", "_blank"); setOpen(false); }}
-                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-ink/90 data-[selected=true]:bg-primary/20"
-                  >
-                    <Download size={16} className="text-primary" /> {t.cmd.downloadCV}
-                  </Command.Item>
                   <Command.Item
                     onSelect={() => { window.open(PROFILE.socials.github, "_blank"); setOpen(false); }}
                     className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-ink/90 data-[selected=true]:bg-primary/20"
