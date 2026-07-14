@@ -1,0 +1,2 @@
+Drop your real CV here as "cv.pdf" (replace this file).
+The "Download CV" buttons link to /cv.pdf.
