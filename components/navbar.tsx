@@ -8,6 +8,7 @@ import { LogoWordmark } from "./logo";
 import { Magnetic } from "./ui/magnetic";
 import { NAV_LINKS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
+import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -52,9 +53,10 @@ export function Navbar() {
       </nav>
 
       <div className="flex items-center gap-2">
+        <ThemeToggle />
         <button
           onClick={() => setLang(lang === "en" ? "az" : "en")}
-          className="flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 font-mono text-[11px] uppercase text-muted transition hover:text-ink"
+          className="flex items-center gap-1 rounded-lg border border-ink/10 bg-ink/5 px-2.5 py-1.5 font-mono text-[11px] uppercase text-muted transition hover:text-ink"
           aria-label={lang === "en" ? "Dili Azərbaycancaya keçir" : "Switch language to English"}
           data-cursor
         >
@@ -62,7 +64,7 @@ export function Navbar() {
         </button>
         <button
           onClick={() => document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }))}
-          className="hidden items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 font-mono text-[11px] text-muted hover:text-ink md:flex"
+          className="hidden items-center gap-1.5 rounded-lg border border-ink/10 bg-ink/5 px-2.5 py-1.5 font-mono text-[11px] text-muted hover:text-ink md:flex"
           aria-label="Open command palette"
         >
           <CmdIcon size={12} /> K

@@ -106,21 +106,21 @@ export function Contact() {
             <input {...field("name")} placeholder={t.contact.name} aria-label={t.contact.name}
               autoComplete="name" aria-invalid={!!errors.name}
               aria-describedby={errors.name ? "err-name" : undefined}
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-ink placeholder:text-muted outline-none transition focus:border-primary/50" />
+              className="w-full rounded-xl border border-ink/10 bg-ink/5 px-4 py-3 text-ink placeholder:text-muted outline-none transition focus:border-primary/50" />
             {errors.name && <p id="err-name" className="mt-1 text-xs text-red-400">{errors.name}</p>}
           </div>
           <div>
             <input {...field("email")} type="email" placeholder={t.contact.email} aria-label={t.contact.email}
               autoComplete="email" aria-invalid={!!errors.email}
               aria-describedby={errors.email ? "err-email" : undefined}
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-ink placeholder:text-muted outline-none transition focus:border-primary/50" />
+              className="w-full rounded-xl border border-ink/10 bg-ink/5 px-4 py-3 text-ink placeholder:text-muted outline-none transition focus:border-primary/50" />
             {errors.email && <p id="err-email" className="mt-1 text-xs text-red-400">{errors.email}</p>}
           </div>
           <div>
             <textarea {...field("message")} rows={5} placeholder={t.contact.message} aria-label={t.contact.messageLabel}
               aria-invalid={!!errors.message}
               aria-describedby={errors.message ? "err-message" : undefined}
-              className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-ink placeholder:text-muted outline-none transition focus:border-primary/50" />
+              className="w-full resize-none rounded-xl border border-ink/10 bg-ink/5 px-4 py-3 text-ink placeholder:text-muted outline-none transition focus:border-primary/50" />
             {errors.message && <p id="err-message" className="mt-1 text-xs text-red-400">{errors.message}</p>}
           </div>
           <Magnetic>

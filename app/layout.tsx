@@ -9,6 +9,7 @@ import { Spotlight } from "@/components/background/spotlight";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/sections/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { Konami } from "@/components/konami";
 import "./globals.css";
 
 const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-display" });
@@ -39,6 +40,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="az" className={`${GeistSans.variable} ${display.variable} ${mono.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light';}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="noise font-sans antialiased" suppressHydrationWarning>
         <LanguageProvider>
           <ScrollProgress />
@@ -49,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="relative z-10">{children}</main>
           <Footer />
           <WhatsAppButton />
+          <Konami />
         </LanguageProvider>
       </body>
     </html>

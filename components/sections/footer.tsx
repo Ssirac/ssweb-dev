@@ -19,7 +19,7 @@ export function Footer() {
   const { t } = useLang();
   const top = () => window.scrollTo({ top: 0, behavior: "smooth" });
   return (
-    <footer className="relative border-t border-white/5 px-6 py-14">
+    <footer className="relative border-t border-ink/5 px-6 py-14">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8">
         <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity }}>
           <Logo size={64} showSymbols />
@@ -44,7 +44,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="flex w-full flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
+        <div className="flex w-full flex-col items-center justify-between gap-4 border-t border-ink/5 pt-8 md:flex-row">
           <p className="text-sm text-muted">
             © {new Date().getFullYear()} <span className="text-ink">SS Developer</span>. {t.footer.crafted}
           </p>

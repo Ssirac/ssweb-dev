@@ -50,7 +50,7 @@ export function CommandPalette() {
               <Command.Input
                 autoFocus
                 placeholder={t.cmd.placeholder}
-                className="w-full border-b border-white/10 bg-transparent px-5 py-4 text-ink placeholder:text-muted"
+                className="w-full border-b border-ink/10 bg-transparent px-5 py-4 text-ink placeholder:text-muted"
               />
               <Command.List className="max-h-80 overflow-y-auto p-2">
                 <Command.Empty className="py-6 text-center text-sm text-muted">{t.cmd.noResults}</Command.Empty>

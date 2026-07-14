@@ -76,27 +76,49 @@ export const HIGHLIGHT_KEYS = ["years", "projects", "design"] as const;
 // ─────────────────────────────────────────────────────────────────────────
 export const PROJECTS = [
   {
+    slug: "mz-personalvermittlung",
     title: "MZ Personalvermittlung",
     category: "Web App",
+    year: "2025",
     image: "/projects/mz.png",
-    tech: ["Next.js", "React", "Tailwind"],
+    tech: ["Next.js", "React", "Tailwind", "Framer Motion"],
     demo: "https://mz-personalvermittlung.de/",
     repo: "",
+    role: { az: "Frontend Developer", en: "Frontend Developer" },
     desc: {
       az: "Almaniyaya beynəlxalq ixtisaslı işçi və təcrübəçi qəbulu üçün çoxdilli landing sayt — xidmət kartları, addım-addım proses və əlaqə forması.",
       en: "Multilingual landing site for placing international skilled workers and apprentices in Germany — service cards, a step-by-step process and a contact form.",
     },
+    about: {
+      az: "Almaniyadakı şirkətləri xaricdən ixtisaslı işçilərlə əlaqələndirən agentlik üçün qurulmuş marketinq saytı. Məqsəd güvən yaratmaq və müraciəti asanlaşdırmaq idi.",
+      en: "A marketing site for an agency connecting German companies with skilled workers from abroad. The goal was to build trust and make it easy to get in touch.",
+    },
+    features: {
+      az: ["Alman/İngilis dil dəstəyi", "İşıq/qaranlıq tema", "Xidmət kartları və addım-addım proses", "Responsiv dizayn və əlaqə forması"],
+      en: ["German/English language support", "Light/dark theme", "Service cards and step-by-step process", "Responsive design and contact form"],
+    },
   },
   {
+    slug: "original-brands-baku",
     title: "Original Brands Baku",
     category: "E-commerce",
+    year: "2025",
     image: "/projects/ob.png",
     tech: ["Next.js", "React", "Tailwind"],
     demo: "https://orginalbrands.vercel.app/",
     repo: "",
+    role: { az: "Frontend Developer", en: "Frontend Developer" },
     desc: {
       az: "Orijinal brend geyim, ayaqqabı və aksesuar kataloqu — kateqoriyalar, seçilmiş məhsullar və birbaşa WhatsApp sifarişi.",
       en: "Catalog storefront for original branded clothing, shoes and accessories — categories, featured products and direct WhatsApp ordering.",
+    },
+    about: {
+      az: "Bakıda orijinal brend məhsullar satan mağaza üçün məhsul kataloqu. Ödəniş sistemi əvəzinə birbaşa WhatsApp sifarişi ilə sadə axın seçildi.",
+      en: "A product catalog for a Baku store selling original branded goods. Instead of a payment gateway, a simple flow via direct WhatsApp ordering was chosen.",
+    },
+    features: {
+      az: ["Kateqoriyalar üzrə məhsul kataloqu", "Brend filtri və seçilmiş məhsullar", "Birbaşa WhatsApp sifarişi", "Sürətli, mobil-uyğun görünüş"],
+      en: ["Category-based product catalog", "Brand filter and featured products", "Direct WhatsApp ordering", "Fast, mobile-friendly layout"],
     },
   },
 ] as const;

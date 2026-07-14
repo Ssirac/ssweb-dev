@@ -30,7 +30,7 @@ export function LoadingScreen() {
           >
             <Logo size={110} showSymbols />
           </motion.div>
-          <div className="mt-10 w-56 h-[3px] rounded-full bg-white/10 overflow-hidden">
+          <div className="mt-10 w-56 h-[3px] rounded-full bg-ink/10 overflow-hidden">
             <motion.div className="h-full bg-brand-gradient" style={{ width: `${pct}%` }} />
           </div>
           <span className="mt-3 font-mono text-xs text-muted tracking-widest">{pct}%</span>

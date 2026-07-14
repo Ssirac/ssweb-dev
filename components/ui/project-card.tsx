@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
 import { PROJECTS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
@@ -45,13 +46,19 @@ export function ProjectCard({ p }: { p: Project }) {
 
       <div className="p-6">
         <span className="font-mono text-xs text-primary">{t.projects.categories[p.category]}</span>
-        <h3 className="mt-1 text-xl font-semibold text-ink transition-colors group-hover:text-primary">{p.title}</h3>
+        <Link href={`/projects/${p.slug}`} className="mt-1 block">
+          <h3 className="text-xl font-semibold text-ink transition-colors group-hover:text-primary">{p.title}</h3>
+        </Link>
         <p className="mt-2 text-sm text-muted">{p.desc[lang]}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {p.tech.map((tech) => (
-            <span key={tech} className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-ink/80">{tech}</span>
+            <span key={tech} className="rounded-full border border-ink/10 bg-ink/5 px-2.5 py-1 text-xs text-ink/80">{tech}</span>
           ))}
         </div>
+        <Link href={`/projects/${p.slug}`} data-cursor
+          className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary transition hover:gap-2">
+          {lang === "az" ? "Ətraflı" : "Details"} <ArrowUpRight size={15} />
+        </Link>
       </div>
     </motion.article>
   );

@@ -51,7 +51,7 @@ export function Skills() {
               <span className="font-medium text-ink">{s.name}</span>
               <span className="font-mono text-muted">{s.level}%</span>
             </div>
-            <div className="h-2 overflow-hidden rounded-full bg-white/10">
+            <div className="h-2 overflow-hidden rounded-full bg-ink/10">
               <motion.div
                 initial={{ width: 0 }} whileInView={{ width: `${s.level}%` }}
                 viewport={{ once: true }} transition={{ duration: 1, ease: "easeOut" }}

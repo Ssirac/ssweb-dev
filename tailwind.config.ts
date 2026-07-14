@@ -5,15 +5,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Matched to the SS brand logo: cool metallic near-black, electric
-        // indigo-blue accent, brushed-silver highlights.
-        background: "#0A0A0D",
-        surface: "#14141A",
-        ink: "#EAECF3",        // cool silver-white — primary text
-        primary: "#4550F5",    // electric indigo-blue — signature accent
-        secondary: "#6E76FF",  // lighter blue, gradient partner
-        silver: "#C7D0E0",     // brushed-metal highlight
-        muted: "#8A8FA3",      // cool gray
+        // Theme-aware — channels defined in globals.css (:root + [data-theme=light]).
+        background: "rgb(var(--c-background) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        primary: "rgb(var(--c-primary) / <alpha-value>)",
+        secondary: "rgb(var(--c-secondary) / <alpha-value>)",
+        silver: "rgb(var(--c-silver) / <alpha-value>)",
+        muted: "rgb(var(--c-muted) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
