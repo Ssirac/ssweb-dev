@@ -14,7 +14,7 @@ export const PROFILE = {
   ],
   socials: {
     github: "https://github.com/ssweb-dev",
-    linkedin: "https://linkedin.com/in/ssweb-dev",
+    linkedin: "https://www.linkedin.com/in/sirac-cavadov-530b89334",
     instagram: "https://www.instagram.com/ssweb.dev/",
     discord: "https://discord.com/users/ssdeveloper",
   },

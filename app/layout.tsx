@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     description: "Clean, modern web experiences built with React, Next.js & TypeScript.",
     type: "website",
   },
-  icons: { icon: "/sslogo.jpg" },
 };
 
 export const viewport: Viewport = {
