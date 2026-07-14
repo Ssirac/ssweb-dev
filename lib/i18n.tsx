@@ -108,6 +108,7 @@ const DICT = {
     },
     footer: {
       crafted: "Crafted with precision.",
+      play: "Play Snake",
     },
     cmd: {
       placeholder: "Type a command or search…",
@@ -217,6 +218,7 @@ const DICT = {
     },
     footer: {
       crafted: "Diqqətlə hazırlanıb.",
+      play: "Snake oyna",
     },
     cmd: {
       placeholder: "Əmr yazın və ya axtarın…",

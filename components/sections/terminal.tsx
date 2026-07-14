@@ -31,6 +31,7 @@ export function Terminal() {
     kimsən: "whoami", kimsen: "whoami", "kim sən": "whoami",
     təmizlə: "clear", temizle: "clear", cls: "clear",
     salam: "hi", "salam əleyküm": "hi", salamlar: "hi", hello: "hi", hey: "hi", hi: "hi",
+    oyun: "game", snake: "game", ilan: "game", play: "game",
   };
 
   const run = (raw: string): string[] => {
@@ -44,8 +45,8 @@ export function Terminal() {
           : ["Hey there! 👋 Type `help` to see what I can do."];
       case "help":
         return az
-          ? ["Əmrlər: help, about, skills, projects, socials, contact, whoami, clear", "(Azərbaycanca da yaza bilərsən: kömək, haqqında, layihələr, əlaqə…)"]
-          : ["Available: help, about, skills, projects, socials, contact, whoami, clear"];
+          ? ["Əmrlər: help, about, skills, projects, socials, contact, game, whoami, clear", "(Azərbaycanca da yaza bilərsən: kömək, haqqında, layihələr, oyun…)"]
+          : ["Available: help, about, skills, projects, socials, contact, game, whoami, clear"];
       case "whoami":
         return [`${PROFILE.name} — Junior Frontend Developer (Azerbaijan)`];
       case "about":
@@ -60,6 +61,8 @@ export function Terminal() {
         return [`GitHub:    ${PROFILE.socials.github}`, `LinkedIn:  ${PROFILE.socials.linkedin}`, `Instagram: ${PROFILE.socials.instagram}`];
       case "contact":
         return [`Email:    ${PROFILE.email}`, `WhatsApp: ${PROFILE.whatsapp[0].display}`];
+      case "game":
+        return az ? ["🐍 Snake oyunu → /play"] : ["🐍 Let's play Snake → /play"];
       case "clear":
         return ["__clear__"];
       default:

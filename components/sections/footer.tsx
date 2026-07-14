@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Gamepad2 } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Logo } from "../logo";
 import { Magnetic } from "../ui/magnetic";
@@ -43,6 +43,11 @@ export function Footer() {
             </a>
           ))}
         </div>
+
+        <Link href="/play" data-cursor
+          className="flex items-center gap-1.5 font-mono text-xs text-muted transition hover:text-primary">
+          <Gamepad2 size={13} /> {t.footer.play}
+        </Link>
 
         <div className="flex w-full flex-col items-center justify-between gap-4 border-t border-ink/5 pt-8 md:flex-row">
           <p className="text-sm text-muted">
