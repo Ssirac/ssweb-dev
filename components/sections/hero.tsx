@@ -81,66 +81,70 @@ export function Hero() {
       {/* soft ambient wash — quiet, single source */}
       <div className="pointer-events-none absolute -top-24 right-0 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[120px]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-5xl">
-        <motion.div {...fade(0)} className="mb-8">
-          <Logo size={84} className="animate-float" />
-        </motion.div>
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        {/* left — copy */}
+        <div>
+          <motion.div {...fade(0)} className="mb-8">
+            <Logo size={84} className="animate-float" />
+          </motion.div>
 
-        <motion.p {...fade(0.05)} className="font-mono text-xs uppercase tracking-[0.32em] text-primary">
-          {t.hero.eyebrow}
-        </motion.p>
+          <motion.p {...fade(0.05)} className="font-mono text-xs uppercase tracking-[0.32em] text-primary">
+            {t.hero.eyebrow}
+          </motion.p>
 
-        <div className="relative mt-6 flex min-h-[6rem] max-w-4xl items-start overflow-hidden sm:min-h-[8rem] md:min-h-[10rem]">
-          <AnimatePresence mode="wait">
-            <motion.h1
-              key={hi}
-              initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0.4 }}
-              animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
-              exit={{ clipPath: "inset(0 0 0 100%)", opacity: 0.4 }}
-              transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
-              className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl md:text-7xl"
-            >
-              {headline.lead}
-              <span className="marker text-ink">{headline.mark}</span>
-              {headline.tail}
-            </motion.h1>
-          </AnimatePresence>
+          <div className="relative mt-6 flex min-h-[6rem] max-w-4xl items-start overflow-hidden sm:min-h-[8rem] md:min-h-[10rem]">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={hi}
+                initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0.4 }}
+                animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
+                exit={{ clipPath: "inset(0 0 0 100%)", opacity: 0.4 }}
+                transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
+                className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl md:text-7xl"
+              >
+                {headline.lead}
+                <span className="marker text-ink">{headline.mark}</span>
+                {headline.tail}
+              </motion.h1>
+            </AnimatePresence>
+          </div>
+
+          <motion.div
+            {...fade(0.3)}
+            className="mt-8 flex items-center gap-2 font-mono text-base text-muted md:text-lg"
+            aria-hidden
+          >
+            <span className="text-primary">$</span>
+            <span className="text-ink/80">{typed}</span>
+            <span className="inline-block h-5 w-[2px] animate-pulse bg-primary" />
+          </motion.div>
+
+          <motion.p {...fade(0.4)} className="mt-6 max-w-xl text-base leading-relaxed text-muted">
+            {t.hero.desc}
+          </motion.p>
+
+          <motion.div {...fade(0.5)} className="mt-10 flex flex-wrap items-center gap-3">
+            <Magnetic>
+              <Link
+                href="/projects"
+                className="group flex items-center gap-2 rounded-full bg-brand-gradient px-6 py-3 font-medium text-background shadow-glow transition hover:shadow-glow-lg"
+              >
+                {t.cta.viewProjects} <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 rounded-full border border-ink/12 px-6 py-3 font-medium text-ink transition hover:border-primary/50 hover:text-primary"
+              >
+                <Mail size={17} /> {t.cta.contactMe}
+              </Link>
+            </Magnetic>
+          </motion.div>
         </div>
 
-        <motion.div
-          {...fade(0.3)}
-          className="mt-8 flex items-center gap-2 font-mono text-base text-muted md:text-lg"
-          aria-hidden
-        >
-          <span className="text-primary">$</span>
-          <span className="text-ink/80">{typed}</span>
-          <span className="inline-block h-5 w-[2px] animate-pulse bg-primary" />
-        </motion.div>
-
-        <motion.p {...fade(0.4)} className="mt-6 max-w-xl text-base leading-relaxed text-muted">
-          {t.hero.desc}
-        </motion.p>
-
-        <motion.div {...fade(0.5)} className="mt-10 flex flex-wrap items-center gap-3">
-          <Magnetic>
-            <Link
-              href="/projects"
-              className="group flex items-center gap-2 rounded-full bg-brand-gradient px-6 py-3 font-medium text-background shadow-glow transition hover:shadow-glow-lg"
-            >
-              {t.cta.viewProjects} <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Magnetic>
-          <Magnetic>
-            <Link
-              href="/contact"
-              className="flex items-center gap-2 rounded-full border border-ink/12 px-6 py-3 font-medium text-ink transition hover:border-primary/50 hover:text-primary"
-            >
-              <Mail size={17} /> {t.cta.contactMe}
-            </Link>
-          </Magnetic>
-        </motion.div>
-
-        <motion.div {...fade(0.6)} className="mt-14 w-full max-w-3xl">
+        {/* right — 3D video */}
+        <motion.div {...fade(0.6)} className="w-full lg:justify-self-end lg:max-w-md">
           <HeroVideo3D />
         </motion.div>
       </div>
