@@ -7,6 +7,11 @@ export function CustomCursor() {
   const y = useMotionValue(-100);
   const sx = useSpring(x, { stiffness: 500, damping: 40 });
   const sy = useSpring(y, { stiffness: 500, damping: 40 });
+  // Two lagging springs form a soft accent comet-trail behind the cursor.
+  const tx1 = useSpring(x, { stiffness: 170, damping: 22, mass: 0.6 });
+  const ty1 = useSpring(y, { stiffness: 170, damping: 22, mass: 0.6 });
+  const tx2 = useSpring(x, { stiffness: 90, damping: 20, mass: 0.9 });
+  const ty2 = useSpring(y, { stiffness: 90, damping: 20, mass: 0.9 });
   const [hovering, setHovering] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
@@ -26,6 +31,24 @@ export function CustomCursor() {
   if (!enabled) return null;
   return (
     <>
+      <motion.div
+        aria-hidden
+        className="fixed top-0 left-0 z-[9997] pointer-events-none rounded-full"
+        style={{
+          x: tx2, y: ty2, width: 30, height: 30,
+          translateX: "-50%", translateY: "-50%", filter: "blur(3px)",
+          background: "radial-gradient(circle, rgba(69,80,245,0.28), transparent 70%)",
+        }}
+      />
+      <motion.div
+        aria-hidden
+        className="fixed top-0 left-0 z-[9997] pointer-events-none rounded-full"
+        style={{
+          x: tx1, y: ty1, width: 16, height: 16,
+          translateX: "-50%", translateY: "-50%", filter: "blur(1px)",
+          background: "radial-gradient(circle, rgba(69,80,245,0.45), transparent 70%)",
+        }}
+      />
       <motion.div
         className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full bg-white mix-blend-difference"
         style={{ x: sx, y: sy, width: 8, height: 8, translateX: "-50%", translateY: "-50%" }}
