@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { AnimatePresence, motion } from "framer-motion";
-import { Home, User, Wrench, FolderGit2, Github, Mail } from "lucide-react";
+import { Home, User, Wrench, FolderGit2, Github, Mail, type LucideIcon } from "lucide-react";
 import { NAV_LINKS, PROFILE } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
-const ICONS: Record<string, React.ElementType> = {
+const ICONS: Record<string, LucideIcon> = {
   hero: Home, about: User, skills: Wrench, services: Wrench,
   projects: FolderGit2, github: Github, contact: Mail,
 };

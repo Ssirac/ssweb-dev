@@ -4,6 +4,7 @@ import {
   SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiTailwindcss, SiPostgresql,
   SiPrisma, SiMongodb, SiDocker, SiFigma, SiExpress, SiGit,
 } from "react-icons/si";
+import type { IconType } from "react-icons";
 import { SectionHeader } from "../ui/section-header";
 import { Marquee } from "../ui/marquee";
 import { SKILLS } from "@/lib/data";
@@ -14,7 +15,7 @@ const MARQUEE = [
   "HTML", "CSS", "Git", "Figma", "Framer Motion", "Node.js",
 ];
 
-const ICONS: Record<string, React.ElementType> = {
+const ICONS: Record<string, IconType> = {
   React: SiReact, "Next.js": SiNextdotjs, TypeScript: SiTypescript, "Node.js": SiNodedotjs,
   Tailwind: SiTailwindcss, PostgreSQL: SiPostgresql, Prisma: SiPrisma, MongoDB: SiMongodb,
   Docker: SiDocker, Figma: SiFigma, Express: SiExpress, Git: SiGit,
