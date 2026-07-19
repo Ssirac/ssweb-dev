@@ -8,7 +8,6 @@ import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, useVideoTexture } from "@react-three/drei";
 import * as THREE from "three";
-import { advancePingPong, type PingPongDirection } from "./hero-video-ping-pong";
 
 const MAX_TILT = (6 * Math.PI) / 180; // ~6° max mouse tilt
 const ACCENT_RGB = "69, 80, 245"; // #4550F5
@@ -41,12 +40,11 @@ function makeGlowTexture() {
 function VideoPanel({ src, active }: { src: string; active: boolean }) {
   const texture = useVideoTexture(src, {
     muted: true,
-    loop: false,
+    loop: true,
     playsInline: true,
   });
   const glow = useMemo(makeGlowTexture, []);
   const tilt = useRef<THREE.Group>(null);
-  const direction = useRef<PingPongDirection["current"]>(1);
 
   // Panel size follows the video's real aspect ratio (no stretching).
   const video = texture.image as HTMLVideoElement | undefined;
@@ -56,27 +54,22 @@ function VideoPanel({ src, active }: { src: string; active: boolean }) {
   const width = height * aspect;
 
   // Play only while the section is on-screen (drei autoplays; we gate it).
+  // The forward→reverse boomerang is baked into the video, so a native loop
+  // gives the seamless go-and-come with no per-frame seeking.
   useEffect(() => {
     if (!video) return;
-    if (active) {
-      direction.current = 1;
-      void video.play?.().catch(() => {});
-    } else {
-      video.pause?.();
-    }
+    if (active) void video.play?.().catch(() => {});
+    else video.pause?.();
   }, [active, video]);
 
-  // Smooth mouse-driven tilt, lerped toward the pointer target; also drives
-  // the ping-pong bounce (forward = native playback, backward = hand-scrubbed).
-  useFrame((state, delta) => {
+  // Smooth mouse-driven tilt, lerped toward the pointer target.
+  useFrame((state) => {
     const g = tilt.current;
-    if (g) {
-      const targetY = state.pointer.x * MAX_TILT;
-      const targetX = -state.pointer.y * MAX_TILT;
-      g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, targetY, 0.06);
-      g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, targetX, 0.06);
-    }
-    if (video && active) advancePingPong(video, delta, direction);
+    if (!g) return;
+    const targetY = state.pointer.x * MAX_TILT;
+    const targetX = -state.pointer.y * MAX_TILT;
+    g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, targetY, 0.06);
+    g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, targetX, 0.06);
   });
 
   return (

@@ -8,7 +8,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { advancePingPong, type PingPongDirection } from "./hero-video-ping-pong";
 
 const MP4 = "/videos/ss-hero.mp4";
 const WEBM = "/videos/ss-hero.webm";
@@ -22,33 +21,14 @@ const HeroVideoScene = dynamic(
 /** Dependency-free fallback: poster + muted looping video. */
 function VideoFallback({ active }: { active: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const direction = useRef<PingPongDirection["current"]>(1);
 
+  // The boomerang (forward→reverse) is baked into the file, so a plain loop
+  // gives the seamless go-and-come with native, judder-free playback.
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    if (active) {
-      direction.current = 1;
-      void v.play().catch(() => {});
-    } else {
-      v.pause();
-    }
-  }, [active]);
-
-  // Hand-driven ping-pong bounce: rAF loop only runs while in view.
-  useEffect(() => {
-    const v = ref.current;
-    if (!v || !active) return;
-    let raf = 0;
-    let last = performance.now();
-    const tick = (now: number) => {
-      const delta = (now - last) / 1000;
-      last = now;
-      advancePingPong(v, delta, direction);
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    if (active) void v.play().catch(() => {});
+    else v.pause();
   }, [active]);
 
   return (
@@ -58,6 +38,7 @@ function VideoFallback({ active }: { active: boolean }) {
       poster={POSTER}
       preload="metadata"
       muted
+      loop
       playsInline
     >
       <source src={WEBM} type="video/webm" />
