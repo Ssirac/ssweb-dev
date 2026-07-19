@@ -9,6 +9,7 @@ import { SectionHeader } from "../ui/section-header";
 import { Marquee } from "../ui/marquee";
 import { SKILLS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
+import { SkillsSphere } from "../skills-sphere";
 
 const MARQUEE = [
   "React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS",
@@ -21,6 +22,8 @@ const ICONS: Record<string, IconType> = {
   Docker: SiDocker, Figma: SiFigma, Express: SiExpress, Git: SiGit,
 };
 
+const SKILL_ITEMS = Object.entries(ICONS).map(([name, Icon]) => ({ name, Icon }));
+
 export function Skills() {
   const { t } = useLang();
   return (
@@ -31,16 +34,8 @@ export function Skills() {
         <Marquee items={MARQUEE} />
       </div>
 
-      <div className="mb-14 flex flex-wrap justify-center gap-4">
-        {Object.entries(ICONS).map(([name, Icon], i) => (
-          <motion.div key={name}
-            initial={{ opacity: 0, scale: 0.5 }} whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }} transition={{ delay: i * 0.04 }} whileHover={{ y: -6, scale: 1.1 }}
-            className="group flex h-16 w-16 items-center justify-center rounded-2xl glass shadow-premium transition hover:border-primary/40 hover:shadow-glow"
-            data-cursor title={name}>
-            <Icon className="text-2xl text-muted transition group-hover:text-primary" />
-          </motion.div>
-        ))}
+      <div className="mb-14">
+        <SkillsSphere items={SKILL_ITEMS} />
       </div>
 
       <div className="grid gap-x-10 gap-y-6 md:grid-cols-2">
