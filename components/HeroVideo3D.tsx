@@ -9,8 +9,10 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 
-const MP4 = "/videos/ss-hero.mp4";
-const WEBM = "/videos/ss-hero.webm";
+// ?v bumped whenever the encoded clip changes, so browsers/CDNs don't serve a
+// stale copy under the same filename (v2 = baked forward→reverse boomerang).
+const MP4 = "/videos/ss-hero.mp4?v=2";
+const WEBM = "/videos/ss-hero.webm?v=2";
 const POSTER = "/videos/ss-hero-poster.jpg";
 
 const HeroVideoScene = dynamic(
