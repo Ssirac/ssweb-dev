@@ -4,3 +4,6 @@ out
 .env.local
 .DS_Store
 *.log
+
+# Raw, unoptimized source media (optimized outputs live in public/videos)
+assets-raw

@@ -1,12 +1,32 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { Logo } from "../logo";
 import { Magnetic } from "../ui/magnetic";
 import { CodeRain } from "../background/code-rain";
 import { useLang } from "@/lib/i18n";
+
+// Lazy: keeps the 3D video (and three) out of the initial hero payload.
+const HeroVideo3D = dynamic(
+  () => import("../HeroVideo3D").then((m) => m.HeroVideo3D),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/videos/ss-hero-poster.jpg"
+          alt=""
+          aria-hidden
+          className="h-full w-full object-cover opacity-80"
+        />
+      </div>
+    ),
+  },
+);
 
 function useTyping(words: readonly string[]) {
   const [text, setText] = useState("");
@@ -118,6 +138,10 @@ export function Hero() {
               <Mail size={17} /> {t.cta.contactMe}
             </Link>
           </Magnetic>
+        </motion.div>
+
+        <motion.div {...fade(0.6)} className="mt-14 w-full max-w-3xl">
+          <HeroVideo3D />
         </motion.div>
       </div>
     </section>
