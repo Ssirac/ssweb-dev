@@ -1,21 +1,57 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useMotionTemplate,
+} from "framer-motion";
 import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
 import { PROJECTS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
 type Project = (typeof PROJECTS)[number];
 
+const MAX_TILT = 8; // degrees
+
 export function ProjectCard({ p }: { p: Project }) {
   const { t, lang } = useLang();
 
+  // Pointer-driven 3D tilt + a glare that tracks the cursor (holographic feel).
+  // Disabled for users who prefer reduced motion.
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const spring = { stiffness: 150, damping: 15, mass: 0.4 };
+  const rotateX = useSpring(useTransform(py, [0, 1], [MAX_TILT, -MAX_TILT]), spring);
+  const rotateY = useSpring(useTransform(px, [0, 1], [-MAX_TILT, MAX_TILT]), spring);
+  const glareX = useTransform(px, (v) => `${v * 100}%`);
+  const glareY = useTransform(py, (v) => `${v * 100}%`);
+  const glare = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.16), transparent 45%)`;
+
+  const onMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width);
+    py.set((e.clientY - r.top) / r.height);
+  };
+  const reset = () => {
+    px.set(0.5);
+    py.set(0.5);
+  };
+
   return (
-    <motion.article layout
-      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.35 }}
-      className="group relative overflow-hidden rounded-3xl glass shadow-premium transition duration-300 ease-out hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-glow-lg"
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.35 }}
+      onPointerMove={onMove}
+      onPointerLeave={reset}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      className="group relative overflow-hidden rounded-3xl glass shadow-premium transition-[box-shadow,border-color] duration-300 ease-out [transform-style:preserve-3d] hover:border-primary/30 hover:shadow-glow-lg"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
@@ -60,6 +96,13 @@ export function ProjectCard({ p }: { p: Project }) {
           {lang === "az" ? "Ətraflı" : "Details"} <ArrowUpRight size={15} />
         </Link>
       </div>
+
+      {/* cursor-tracking glare — sits above content, never intercepts clicks */}
+      <motion.div
+        aria-hidden
+        style={{ background: glare }}
+        className="pointer-events-none absolute inset-0 z-10 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
     </motion.article>
   );
 }

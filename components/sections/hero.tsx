@@ -100,7 +100,7 @@ export function Hero() {
                 animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
                 exit={{ clipPath: "inset(0 0 0 100%)", opacity: 0.4 }}
                 transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
-                className="font-display text-[2.1rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-5xl xl:text-[3.25rem]"
+                className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.6rem] md:text-5xl lg:text-[2.7rem] xl:text-[3rem]"
               >
                 {headline.lead}
                 <span className="marker text-ink">{headline.mark}</span>
