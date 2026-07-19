@@ -81,7 +81,7 @@ export function Hero() {
       {/* soft ambient wash — quiet, single source */}
       <div className="pointer-events-none absolute -top-24 right-0 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[120px]" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
         {/* left — copy */}
         <div>
           <motion.div {...fade(0)} className="mb-8">
@@ -92,7 +92,7 @@ export function Hero() {
             {t.hero.eyebrow}
           </motion.p>
 
-          <div className="relative mt-6 flex min-h-[6rem] max-w-4xl items-start overflow-hidden sm:min-h-[8rem] md:min-h-[10rem]">
+          <div className="relative mt-6 flex min-h-[5rem] max-w-4xl items-start overflow-hidden sm:min-h-[6.5rem] md:min-h-[8rem] lg:min-h-[9rem]">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={hi}
@@ -100,7 +100,7 @@ export function Hero() {
                 animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
                 exit={{ clipPath: "inset(0 0 0 100%)", opacity: 0.4 }}
                 transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
-                className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl md:text-7xl"
+                className="font-display text-[2.1rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-5xl xl:text-[3.25rem]"
               >
                 {headline.lead}
                 <span className="marker text-ink">{headline.mark}</span>
@@ -144,7 +144,7 @@ export function Hero() {
         </div>
 
         {/* right — 3D video */}
-        <motion.div {...fade(0.6)} className="w-full lg:justify-self-end lg:max-w-md">
+        <motion.div {...fade(0.6)} className="w-full lg:justify-self-end">
           <HeroVideo3D />
         </motion.div>
       </div>
