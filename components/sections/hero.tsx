@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
-import { Logo } from "../logo";
+import { HeroLogo3D } from "../hero-logo-3d";
 import { Magnetic } from "../ui/magnetic";
 import { CodeRain } from "../background/code-rain";
 import { useLang } from "@/lib/i18n";
@@ -85,7 +85,7 @@ export function Hero() {
         {/* left — copy */}
         <div>
           <motion.div {...fade(0)} className="mb-8">
-            <Logo size={84} className="animate-float" />
+            <HeroLogo3D size={84} />
           </motion.div>
 
           <motion.p {...fade(0.05)} className="font-mono text-xs uppercase tracking-[0.32em] text-primary">
