@@ -9,6 +9,7 @@ import { Magnetic } from "./ui/magnetic";
 import { NAV_LINKS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 import { ThemeToggle } from "./theme-toggle";
+import { AccentPicker } from "./accent-picker";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -53,6 +54,7 @@ export function Navbar() {
       </nav>
 
       <div className="flex items-center gap-2">
+        <AccentPicker />
         <ThemeToggle />
         <button
           onClick={() => setLang(lang === "en" ? "az" : "en")}
