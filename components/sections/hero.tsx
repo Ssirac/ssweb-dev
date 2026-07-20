@@ -90,6 +90,12 @@ export function Hero() {
       {/* soft ambient wash — quiet, single source */}
       <div className="pointer-events-none absolute -top-24 right-0 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[120px]" />
 
+      {/* cinematic vignette — darkens the edges to focus the eye */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{ background: "radial-gradient(125% 125% at 50% 35%, transparent 55%, rgba(0,0,0,0.5) 100%)" }}
+      />
+
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
         {/* left — copy */}
         <div>
