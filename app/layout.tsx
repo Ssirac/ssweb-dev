@@ -6,6 +6,7 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { CommandPalette } from "@/components/command-palette";
 import { Grid } from "@/components/background/grid";
 import { Spotlight } from "@/components/background/spotlight";
+import { Aurora } from "@/components/background/aurora";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/sections/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           <ScrollProgress />
           <CommandPalette />
+          <Aurora />
           <Grid />
           <Spotlight />
           <Navbar />

@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { HeroLogo3D } from "../hero-logo-3d";
 import { Magnetic } from "../ui/magnetic";
@@ -70,8 +70,17 @@ export function Hero() {
   }, [count]);
   const headline = t.hero.headlines[hi % count];
 
+  // Scroll-driven 3D: the video panel recedes/tilts as the hero scrolls away.
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const vidY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const vidRotate = useTransform(scrollYProgress, [0, 1], [0, 12]);
+  const vidScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const vidOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.45]);
+
   return (
     <section
+      ref={heroRef}
       id="hero"
       className="section-anchor relative flex min-h-screen flex-col justify-center px-6 pt-28 pb-20 md:px-12 lg:px-20"
     >
@@ -143,9 +152,13 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* right — 3D video */}
+        {/* right — 3D video (parallax depth on scroll) */}
         <motion.div {...fade(0.6)} className="w-full lg:justify-self-end">
-          <HeroVideo3D />
+          <motion.div
+            style={{ y: vidY, rotateX: vidRotate, scale: vidScale, opacity: vidOpacity, transformPerspective: 1200 }}
+          >
+            <HeroVideo3D />
+          </motion.div>
         </motion.div>
       </div>
     </section>
