@@ -9,12 +9,14 @@ import { Terminal } from "@/components/sections/terminal";
 import { Contact } from "@/components/sections/contact";
 import { Orb3D } from "@/components/orb-3d";
 import { Globe3D } from "@/components/globe-3d";
+import { ScrollModel } from "@/components/scroll-model";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <About />
+      <ScrollModel />
       <Skills />
       <Services />
       <section className="relative mx-auto max-w-6xl px-6 py-10">
