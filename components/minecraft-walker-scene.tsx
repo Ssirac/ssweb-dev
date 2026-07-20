@@ -19,16 +19,17 @@ function Character({ dir }: { dir: MutableRefObject<number> }) {
     const box = new THREE.Box3().setFromObject(obj);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z) || 1;
-    return { object: obj, scaleFactor: 1.7 / maxDim };
+    return { object: obj, scaleFactor: 1.5 / maxDim };
   }, [scene]);
 
   useFrame((state) => {
     const grp = g.current;
     if (!grp) return;
     const t = state.clock.elapsedTime;
-    grp.rotation.y = THREE.MathUtils.lerp(grp.rotation.y, dir.current * -0.6, 0.12);
-    grp.position.y = Math.abs(Math.sin(t * 7)) * 0.12 - 0.7; // step bob, sit low
-    grp.rotation.z = Math.sin(t * 7) * 0.04; // waddle
+    // turn to face the travel direction (3/4 view)
+    grp.rotation.y = THREE.MathUtils.lerp(grp.rotation.y, dir.current * -0.85, 0.12);
+    grp.position.y = Math.abs(Math.sin(t * 7)) * 0.1; // centered step bob
+    grp.rotation.z = Math.sin(t * 7) * 0.05; // waddle
   });
 
   return (
@@ -46,7 +47,7 @@ export function MinecraftWalkerScene({ dir }: { dir: MutableRefObject<number> })
       style={{ position: "absolute", inset: 0 }}
       dpr={[1, 2]}
       gl={{ alpha: true, antialias: true }}
-      camera={{ position: [0, 0, 4], fov: 40 }}
+      camera={{ position: [0, 0, 4.6], fov: 38 }}
     >
       <ambientLight intensity={0.95} />
       <directionalLight position={[3, 5, 4]} intensity={1.3} />
