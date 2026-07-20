@@ -14,6 +14,7 @@ import { Aurora } from "@/components/background/aurora";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/sections/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { MinecraftWalker } from "@/components/minecraft-walker";
 import { Konami } from "@/components/konami";
 import "./globals.css";
 
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main" className="relative z-10">{children}</main>
           <Footer />
           <WhatsAppButton />
+          <MinecraftWalker />
           <Konami />
         </LanguageProvider>
         <Analytics />
