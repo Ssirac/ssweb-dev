@@ -8,7 +8,6 @@ import { RunnerGame } from "@/components/sections/runner-game";
 import { Terminal } from "@/components/sections/terminal";
 import { Contact } from "@/components/sections/contact";
 import { Orb3D } from "@/components/orb-3d";
-import { Globe3D } from "@/components/globe-3d";
 import { ScrollModel } from "@/components/scroll-model";
 
 export default function Home() {
@@ -19,9 +18,6 @@ export default function Home() {
       <ScrollModel />
       <Skills />
       <Services />
-      <section className="relative mx-auto max-w-6xl px-6 py-10">
-        <Globe3D />
-      </section>
       <Projects />
       <GithubStats />
       <section className="relative mx-auto max-w-6xl px-6 py-10">
