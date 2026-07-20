@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { ScrambleText } from "./scramble-text";
 
 export function SectionHeader({ tag, title, subtitle }: { tag: string; title: string; subtitle?: string }) {
   return (
@@ -19,7 +20,7 @@ export function SectionHeader({ tag, title, subtitle }: { tag: string; title: st
         transition={{ delay: 0.05 }}
         className="mx-auto mt-3 max-w-3xl font-display text-4xl md:text-5xl font-bold tracking-tight text-ink"
       >
-        {title}
+        <ScrambleText text={title} />
       </motion.h2>
       {subtitle && (
         <motion.p
