@@ -27,8 +27,11 @@ function Model({ progress }: { progress: MutableRefObject<number> }) {
   useFrame((state) => {
     const g = group.current;
     if (!g) return;
-    g.rotation.y = progress.current * Math.PI * 2 + state.pointer.x * 0.4;
-    g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, -state.pointer.y * 0.15, 0.05);
+    const t = state.clock.elapsedTime;
+    // always-on idle spin + float bob; scroll adds extra rotation on top
+    g.rotation.y = t * 0.6 + progress.current * Math.PI * 3 + state.pointer.x * 0.4;
+    g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, -state.pointer.y * 0.2 + 0.05, 0.06);
+    g.position.y = Math.sin(t * 1.4) * 0.12;
   });
 
   return (
