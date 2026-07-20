@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SITE_URL } from "@/lib/site";
+import { PROFILE } from "@/lib/data";
 import { LanguageProvider } from "@/lib/i18n";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { CommandPalette } from "@/components/command-palette";
@@ -17,6 +21,8 @@ const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "700"], vari
 const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   title: {
     default: "SS Developer — Junior Frontend Developer",
     template: "%s · SS Developer",
@@ -47,8 +53,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light';}catch(e){}`,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: PROFILE.name,
+              url: SITE_URL,
+              jobTitle: "Junior Frontend Developer",
+              email: `mailto:${PROFILE.email}`,
+              sameAs: [
+                PROFILE.socials.github,
+                PROFILE.socials.linkedin,
+                PROFILE.socials.instagram,
+              ],
+              knowsAbout: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Frontend Development"],
+            }),
+          }}
+        />
       </head>
       <body className="noise font-sans antialiased" suppressHydrationWarning>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:font-medium focus:text-background"
+        >
+          İçəriyə keç
+        </a>
         <LanguageProvider>
           <ScrollProgress />
           <CommandPalette />
@@ -56,11 +87,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Grid />
           <Spotlight />
           <Navbar />
-          <main className="relative z-10">{children}</main>
+          <main id="main" className="relative z-10">{children}</main>
           <Footer />
           <WhatsAppButton />
           <Konami />
         </LanguageProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
