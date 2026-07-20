@@ -7,6 +7,7 @@ import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { SectionHeader } from "../ui/section-header";
 import { Magnetic } from "../ui/magnetic";
 import { PROFILE } from "@/lib/data";
+import { fireConfetti } from "@/lib/confetti";
 import { useLang } from "@/lib/i18n";
 
 const SOCIALS = [
@@ -48,6 +49,7 @@ export function Contact() {
         await new Promise((r) => setTimeout(r, 900)); // demo fallback
       }
       setStatus("sent");
+      fireConfetti();
       setForm({ name: "", email: "", message: "" });
       setTimeout(() => setStatus("idle"), 3500);
     } catch {
