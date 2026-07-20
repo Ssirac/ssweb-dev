@@ -20,14 +20,16 @@ const config: Config = {
         mono: ["var(--font-mono)", "monospace"],
       },
       boxShadow: {
-        glow: "0 0 40px -10px rgba(69,80,245,0.45)",
-        "glow-lg": "0 0 90px -14px rgba(69,80,245,0.50)",
+        // accent-driven so the runtime accent picker recolors glows too
+        glow: "0 0 40px -10px rgb(var(--c-primary) / 0.45)",
+        "glow-lg": "0 0 90px -14px rgb(var(--c-primary) / 0.50)",
         premium: "0 24px 70px -28px rgba(0,0,0,0.85), 0 0 1px rgba(234,236,243,0.10) inset",
       },
       backgroundImage: {
         "grid-pattern":
           "linear-gradient(to right, rgba(234,236,243,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(234,236,243,0.035) 1px, transparent 1px)",
-        "brand-gradient": "linear-gradient(135deg, #4550F5 0%, #6E76FF 100%)",
+        "brand-gradient":
+          "linear-gradient(135deg, rgb(var(--c-primary)) 0%, rgb(var(--c-secondary)) 100%)",
       },
       keyframes: {
         float: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-14px)" } },

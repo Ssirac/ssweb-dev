@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light';}catch(e){}`,
+            __html: `try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light';var a=localStorage.getItem('accent');if(a){var p=JSON.parse(a);document.documentElement.style.setProperty('--c-primary',p[0]);document.documentElement.style.setProperty('--c-secondary',p[1]);}}catch(e){}`,
           }}
         />
         <script
