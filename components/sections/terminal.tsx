@@ -11,6 +11,8 @@ export function Terminal() {
   const [value, setValue] = useState("");
   const bodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const cmdHistory = useRef<string[]>([]);
+  const histIdx = useRef(-1);
 
   const az = lang === "az";
   const banner = az
@@ -32,10 +34,17 @@ export function Terminal() {
     təmizlə: "clear", temizle: "clear", cls: "clear",
     salam: "hi", "salam əleyküm": "hi", salamlar: "hi", hello: "hi", hey: "hi", hi: "hi",
     oyun: "game", snake: "game", ilan: "game", play: "game",
+    xidmətlər: "services", xidmetler: "services",
+    təhsil: "education", tehsil: "education",
+    tarix: "date", siyahı: "ls", siyahi: "ls", tema: "theme",
   };
 
   const run = (raw: string): string[] => {
-    const input = raw.trim().toLowerCase();
+    const trimmed = raw.trim();
+    const input = trimmed.toLowerCase();
+    if (input === "echo" || input.startsWith("echo ")) return [trimmed.slice(4).trim()];
+    if (input === "sudo" || input.startsWith("sudo "))
+      return [az ? "İcazə rədd edildi. Gözəl cəhd idi 😄" : "Permission denied. Nice try 😄"];
     const cmd = ALIASES[input] ?? input;
     switch (cmd) {
       case "": return [];
@@ -45,8 +54,8 @@ export function Terminal() {
           : ["Hey there! 👋 Type `help` to see what I can do."];
       case "help":
         return az
-          ? ["Əmrlər: help, about, skills, projects, socials, contact, game, whoami, clear", "(Azərbaycanca da yaza bilərsən: kömək, haqqında, layihələr, oyun…)"]
-          : ["Available: help, about, skills, projects, socials, contact, game, whoami, clear"];
+          ? ["Əmrlər: help, about, skills, projects, services, github, socials, contact, game, whoami, ls, neofetch, date, echo, theme, clear", "(Azərbaycanca da: kömək, haqqında, layihələr, xidmətlər, oyun…) — ↑/↓ ilə əvvəlki əmrlər)"]
+          : ["Available: help, about, skills, projects, services, github, socials, contact, game, whoami, ls, neofetch, date, echo, theme, clear", "(Use ↑/↓ for command history)"];
       case "whoami":
         return [`${PROFILE.name} — Junior Frontend Developer (Azerbaijan)`];
       case "about":
@@ -63,6 +72,39 @@ export function Terminal() {
         return [`Email:    ${PROFILE.email}`, `WhatsApp: ${PROFILE.whatsapp[0].display}`];
       case "game":
         return az ? ["🐍 Snake oyunu → /play"] : ["🐍 Let's play Snake → /play"];
+      case "ls":
+        return ["about  skills  services  projects  github  play  contact"];
+      case "services":
+        return az
+          ? ["Frontend development · responsive UI · landing səhifələr · performans. → /services"]
+          : ["Frontend development · responsive UI · landing pages · performance. → /services"];
+      case "education":
+        return az ? ["DIV Academy — Frontend proqramı."] : ["DIV Academy — Frontend program."];
+      case "github":
+        return [PROFILE.socials.github];
+      case "date":
+        return [new Date().toLocaleString(az ? "az-AZ" : "en-US")];
+      case "neofetch":
+        return [
+          `${PROFILE.name}@ssweb.dev`,
+          "----------------------",
+          "role:  Junior Frontend Developer",
+          "stack: React · Next.js · TypeScript · Tailwind",
+          "loc:   Azerbaijan",
+        ];
+      case "theme": {
+        const light = document.documentElement.dataset.theme === "light";
+        try {
+          if (light) {
+            delete document.documentElement.dataset.theme;
+            localStorage.setItem("theme", "dark");
+          } else {
+            document.documentElement.dataset.theme = "light";
+            localStorage.setItem("theme", "light");
+          }
+        } catch {}
+        return [az ? "Tema dəyişdirildi." : "Theme toggled."];
+      }
       case "clear":
         return ["__clear__"];
       default:
@@ -73,9 +115,27 @@ export function Terminal() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const out = run(value);
+    if (value.trim()) cmdHistory.current = [...cmdHistory.current, value].slice(-50);
+    histIdx.current = -1;
     if (out[0] === "__clear__") { setHistory([]); setValue(""); return; }
     setHistory((h) => [...h, { cmd: value, out }]);
     setValue("");
+  };
+
+  const onKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const h = cmdHistory.current;
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (!h.length) return;
+      histIdx.current = histIdx.current < 0 ? h.length - 1 : Math.max(0, histIdx.current - 1);
+      setValue(h[histIdx.current]);
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (histIdx.current < 0) return;
+      histIdx.current += 1;
+      if (histIdx.current >= h.length) { histIdx.current = -1; setValue(""); }
+      else setValue(h[histIdx.current]);
+    }
   };
 
   return (
@@ -104,6 +164,7 @@ export function Terminal() {
               ref={inputRef}
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              onKeyDown={onKey}
               spellCheck={false}
               autoComplete="off"
               aria-label="terminal input"
