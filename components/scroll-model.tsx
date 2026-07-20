@@ -42,9 +42,9 @@ export function ScrollModel() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="relative mx-auto w-full max-w-4xl px-6" style={{ height: "130vh" }}>
-      <div className="sticky top-0 flex h-screen items-center justify-center">
-        <div className="relative h-[72vh] w-full">
+    <div ref={sectionRef} className="relative mx-auto h-[80vh] w-full max-w-4xl px-6 md:h-[130vh]">
+      <div className="sticky top-0 flex h-[80vh] items-center justify-center md:h-screen">
+        <div className="relative h-[60vh] w-full md:h-[72vh]">
           <div
             className="pointer-events-none absolute inset-0"
             style={{ background: "radial-gradient(circle at 50% 50%, rgba(69,80,245,0.14), transparent 65%)" }}
