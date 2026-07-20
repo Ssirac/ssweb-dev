@@ -12,6 +12,7 @@ import { Grid } from "@/components/background/grid";
 import { Spotlight } from "@/components/background/spotlight";
 import { Aurora } from "@/components/background/aurora";
 import { Navbar } from "@/components/navbar";
+import { LoadingScreen } from "@/components/loading-screen";
 import { Footer } from "@/components/sections/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { Konami } from "@/components/konami";
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="noise font-sans antialiased" suppressHydrationWarning>
+        <LoadingScreen />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:font-medium focus:text-background"
