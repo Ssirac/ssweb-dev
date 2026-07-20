@@ -91,8 +91,16 @@ export function SkillsSphere({ items }: { items: SkillItem[] }) {
   }, [enabled, points]);
 
   if (enabled === null) {
-    // pre-hydration: reserve height, avoid layout shift
-    return <div style={{ height: BOX }} aria-hidden />;
+    // Pre-hydration we don't yet know desktop vs mobile. Render the same grid
+    // the mobile fallback resolves to (so phones see no height change), and
+    // reserve the sphere's height only at >=md, where we swap to the canvas.
+    // Fixing a flat BOX here made the page ~156px taller on load and then
+    // snap shorter — the phantom scrollbar you saw on refresh.
+    return (
+      <div className="md:h-[380px]" aria-hidden>
+        <Grid items={items} />
+      </div>
+    );
   }
   if (!enabled) return <Grid items={items} />;
 

@@ -43,5 +43,13 @@ export function CountUp({
   }, [inView, target, duration]);
 
   if (target === null) return <span ref={ref} className={className}>{raw}</span>;
-  return <span ref={ref} className={className}>{val}{suffix}</span>;
+  // Reserve the final width so the digit count growing (e.g. 0 → 10) doesn't
+  // reflow the text and cause a layout shift. tabular-nums keeps every digit
+  // the same width; min-width pins the box to the final number's length.
+  return (
+    <span ref={ref} className={className}>
+      <span className="inline-block text-left tabular-nums" style={{ minWidth: `${String(target).length}ch` }}>{val}</span>
+      {suffix}
+    </span>
+  );
 }
