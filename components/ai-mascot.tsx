@@ -52,6 +52,10 @@ export function AiMascot() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Desktop-only, like every other WebGL piece on the site. A roaming 3D
+    // canvas rendering every frame competes with scrolling on phones and made
+    // the page stutter, so mobile skips it entirely.
+    const desktop = window.matchMedia("(min-width: 768px)").matches;
     let ok = false;
     try {
       const c = document.createElement("canvas");
@@ -59,7 +63,7 @@ export function AiMascot() {
     } catch {
       ok = false;
     }
-    setEnabled(!reduce && ok);
+    setEnabled(!reduce && ok && desktop);
   }, []);
 
   useEffect(() => {
