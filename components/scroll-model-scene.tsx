@@ -6,10 +6,10 @@
 
 import { MutableRefObject, Suspense, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Center } from "@react-three/drei";
+import { useGLTF, Center, Environment, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
 
-const MODEL_URL = "/models/pirate-captain.glb";
+const MODEL_URL = "/models/showcase-model.glb";
 
 function Model({ progress }: { progress: MutableRefObject<number> }) {
   const { scene } = useGLTF(MODEL_URL);
@@ -51,10 +51,16 @@ export function ScrollModelScene({ progress }: { progress: MutableRefObject<numb
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 5], fov: 42 }}
     >
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[5, 6, 5]} intensity={1.6} />
-      <directionalLight position={[-5, -2, -3]} intensity={0.5} color="#6E76FF" />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[5, 6, 5]} intensity={1.2} />
+      <directionalLight position={[-5, -2, -3]} intensity={0.4} color="#6E76FF" />
       <Suspense fallback={null}>
+        {/* CDN-free image-based lighting so the PBR model reads properly */}
+        <Environment resolution={64} frames={1}>
+          <Lightformer intensity={2.5} position={[0, 4, 4]} scale={[6, 6, 1]} color="#ffffff" />
+          <Lightformer intensity={1.4} position={[-5, 1, 2]} scale={[5, 5, 1]} color="#8b93ff" />
+          <Lightformer intensity={1.2} position={[5, -2, 1]} scale={[5, 5, 1]} color="#4550f5" />
+        </Environment>
         <Model progress={progress} />
       </Suspense>
     </Canvas>
