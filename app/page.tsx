@@ -20,9 +20,7 @@ export default function Home() {
       <Services />
       <Projects />
       <GithubStats />
-      <section className="relative mx-auto max-w-6xl px-6 py-10">
-        <Orb3D />
-      </section>
+      <Orb3D />
       <RunnerGame />
       <Terminal />
       <Contact />

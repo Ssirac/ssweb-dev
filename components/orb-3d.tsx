@@ -25,17 +25,16 @@ export function Orb3D() {
     setWebgl(desktop && !reduce && ok);
   }, []);
 
+  // Purely decorative — no meaningful mobile fallback, so render nothing there.
+  if (!webgl) return null;
+
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-sm">
+    <div className="relative mx-auto my-16 aspect-square w-full max-w-sm px-6">
       <div
         className="pointer-events-none absolute inset-0 rounded-full blur-3xl"
         style={{ background: "radial-gradient(circle at 50% 50%, rgba(69,80,245,0.30), transparent 65%)" }}
       />
-      {webgl ? (
-        <Orb3DScene />
-      ) : (
-        <div className="animate-float absolute inset-10 rounded-full bg-brand-gradient opacity-80 blur-[2px]" />
-      )}
+      <Orb3DScene />
     </div>
   );
 }

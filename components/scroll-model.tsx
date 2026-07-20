@@ -41,22 +41,20 @@ export function ScrollModel() {
     return () => clearTimeout(t);
   }, []);
 
+  // Desktop-only scroll showpiece — render nothing (no tall gap, no blob) on
+  // mobile / no-WebGL.
+  if (!webgl) return null;
+
   return (
-    <div ref={sectionRef} className="relative mx-auto h-[80vh] w-full max-w-4xl px-6 md:h-[130vh]">
-      <div className="sticky top-0 flex h-[80vh] items-center justify-center md:h-screen">
-        <div className="relative h-[60vh] w-full md:h-[72vh]">
+    <div ref={sectionRef} className="relative mx-auto h-[130vh] w-full max-w-4xl px-6">
+      <div className="sticky top-0 flex h-screen items-center justify-center">
+        <div className="relative h-[72vh] w-full">
           <div
             className="pointer-events-none absolute inset-0"
             style={{ background: "radial-gradient(circle at 50% 50%, rgba(69,80,245,0.14), transparent 65%)" }}
           />
-          {webgl ? (
-            <ScrollModelScene progress={progress} />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="animate-float h-48 w-48 rounded-full bg-brand-gradient opacity-70 blur-[2px]" />
-            </div>
-          )}
-          {webgl && hint && (
+          <ScrollModelScene progress={progress} />
+          {hint && (
             <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-black/25 px-3 py-1 font-mono text-xs text-white/70 backdrop-blur-sm">
               ↕ scroll et
             </div>
