@@ -88,7 +88,7 @@ export function Hero() {
       <CodeRain />
 
       {/* soft ambient wash — quiet, single source */}
-      <div className="pointer-events-none absolute -top-24 right-0 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -top-24 right-0 hidden h-[520px] w-[520px] rounded-full bg-primary/10 blur-[120px] md:block" />
 
       {/* cinematic vignette — darkens the edges to focus the eye */}
       <div

@@ -32,7 +32,7 @@ export function CodeRain() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-[0.09] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)] motion-reduce:hidden"
+      className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden opacity-[0.09] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)] motion-reduce:hidden md:block"
     >
       <div className="flex h-full justify-between gap-8 px-2">
         {COLS.map((c, i) => (
