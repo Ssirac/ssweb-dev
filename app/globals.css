@@ -32,12 +32,15 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* clip prevents horizontal scroll from decorative overflow (blur blobs, canvases)
+   without creating a scroll container, so fixed/sticky elements keep working. */
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   background: rgb(var(--c-background));
   color: rgb(var(--c-ink));
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 ::selection { background: rgb(var(--c-primary) / 0.35); color: rgb(var(--c-ink)); }
