@@ -32,7 +32,19 @@ function useTyping(words: readonly string[]) {
   const [text, setText] = useState("");
   const [i, setI] = useState(0);
   const [del, setDel] = useState(false);
+  // Skip the per-character animation (constant re-renders) on mobile / reduced
+  // motion — show the first role statically instead.
+  const [animate, setAnimate] = useState<boolean | null>(null);
+
   useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+    setAnimate(!reduce && !mobile);
+  }, []);
+
+  useEffect(() => {
+    if (animate === null) return;
+    if (!animate) { setText(words[0] ?? ""); return; }
     const word = words[i % words.length];
     const speed = del ? 45 : 90;
     const t = setTimeout(() => {
@@ -45,7 +57,7 @@ function useTyping(words: readonly string[]) {
       }
     }, speed);
     return () => clearTimeout(t);
-  }, [text, del, i, words]);
+  }, [text, del, i, words, animate]);
   return text;
 }
 
