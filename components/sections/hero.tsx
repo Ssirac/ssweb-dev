@@ -7,6 +7,7 @@ import { ArrowRight, Mail } from "lucide-react";
 import { HeroLogo3D } from "../hero-logo-3d";
 import { Magnetic } from "../ui/magnetic";
 import { CodeRain } from "../background/code-rain";
+import { MeshBackdrop } from "../background/mesh-backdrop";
 import { useLang } from "@/lib/i18n";
 
 // Lazy: keeps the 3D video (and three) out of the initial hero payload.
@@ -99,8 +100,8 @@ export function Hero() {
       {/* flowing code backdrop */}
       <CodeRain />
 
-      {/* soft ambient wash — quiet, single source */}
-      <div className="pointer-events-none absolute -top-24 right-0 hidden h-[520px] w-[520px] rounded-full bg-primary/10 blur-[120px] md:block" />
+      {/* animated indigo aurora-mesh backdrop (desktop only) */}
+      <MeshBackdrop />
 
       {/* cinematic vignette — darkens the edges to focus the eye */}
       <div
