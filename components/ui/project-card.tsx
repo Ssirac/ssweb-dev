@@ -51,7 +51,7 @@ export function ProjectCard({ p }: { p: Project }) {
       onPointerMove={onMove}
       onPointerLeave={reset}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative overflow-hidden rounded-3xl glass shadow-premium transition-[box-shadow,border-color] duration-300 ease-out [transform-style:preserve-3d] hover:border-primary/30 hover:shadow-glow-lg"
+      className="group relative overflow-hidden rounded-3xl glass glass-accent shadow-premium transition-[box-shadow,border-color] duration-300 ease-out [transform-style:preserve-3d] hover:border-primary/30 hover:shadow-glow-lg"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
