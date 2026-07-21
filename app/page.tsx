@@ -8,14 +8,12 @@ import { RunnerGame } from "@/components/sections/runner-game";
 import { Terminal } from "@/components/sections/terminal";
 import { Contact } from "@/components/sections/contact";
 import { Orb3D } from "@/components/orb-3d";
-import { ScrollModel } from "@/components/scroll-model";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <About />
-      <ScrollModel />
       <Skills />
       <Services />
       <Projects />
