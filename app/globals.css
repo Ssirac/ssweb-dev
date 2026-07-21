@@ -124,6 +124,10 @@ body {
 .section-anchor { scroll-margin-top: 90px; }
 
 @keyframes code-scroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+/* drifting aurora-mesh blobs (see MeshBackdrop) */
+@keyframes mesh-a { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(70px,44px,0) scale(1.16); } }
+@keyframes mesh-b { 0%,100% { transform: translate3d(0,0,0) scale(1.08); } 50% { transform: translate3d(-56px,34px,0) scale(0.94); } }
+@keyframes mesh-c { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(36px,-46px,0) scale(1.22); } }
 @keyframes card-spin {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
