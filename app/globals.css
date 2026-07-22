@@ -123,6 +123,17 @@ body {
 
 .section-anchor { scroll-margin-top: 90px; }
 
+/* small brand spinner (Spline suspense fallback) */
+.loader {
+  display: inline-block;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 3px solid rgb(var(--c-primary) / 0.25);
+  border-top-color: rgb(var(--c-primary));
+  animation: loader-spin 0.8s linear infinite;
+}
+@keyframes loader-spin { to { transform: rotate(360deg); } }
+
 /* typewriter reveal for the hero code layer — clip-path only (paint, no layout) */
 @keyframes code-type {
   0%    { clip-path: inset(0 100% 0 0); opacity: 1; animation-timing-function: steps(30, end); }
