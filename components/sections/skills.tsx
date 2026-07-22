@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import {
   SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiTailwindcss, SiPostgresql,
   SiPrisma, SiMongodb, SiDocker, SiFigma, SiExpress, SiGit,
@@ -7,9 +6,9 @@ import {
 import type { IconType } from "react-icons";
 import { SectionHeader } from "../ui/section-header";
 import { Marquee } from "../ui/marquee";
-import { SKILLS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 import { SkillsSphere } from "../skills-sphere";
+import { SkillRadar } from "../ui/skill-radar";
 
 const MARQUEE = [
   "React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS",
@@ -38,24 +37,7 @@ export function Skills() {
         <SkillsSphere items={SKILL_ITEMS} />
       </div>
 
-      <div className="grid gap-x-10 gap-y-6 md:grid-cols-2">
-        {SKILLS.map((s, i) => (
-          <motion.div key={s.name}
-            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-            <div className="mb-2 flex justify-between text-sm">
-              <span className="font-medium text-ink">{s.name}</span>
-              <span className="font-mono text-muted">{s.level}%</span>
-            </div>
-            <div className="h-2 overflow-hidden rounded-full bg-ink/10">
-              <motion.div
-                initial={{ width: 0 }} whileInView={{ width: `${s.level}%` }}
-                viewport={{ once: true }} transition={{ duration: 1, ease: "easeOut" }}
-                className="h-full rounded-full bg-brand-gradient shadow-glow" />
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      <SkillRadar />
     </section>
   );
 }
