@@ -123,7 +123,15 @@ body {
 
 .section-anchor { scroll-margin-top: 90px; }
 
-@keyframes code-scroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+/* typewriter reveal for the hero code layer — clip-path only (paint, no layout) */
+@keyframes code-type {
+  0%    { clip-path: inset(0 100% 0 0); opacity: 1; animation-timing-function: steps(30, end); }
+  24%   { clip-path: inset(0 0 0 0); animation-timing-function: linear; }
+  80%   { clip-path: inset(0 0 0 0); opacity: 1; }
+  92%   { opacity: 0; }
+  92.1% { clip-path: inset(0 100% 0 0); }
+  100%  { clip-path: inset(0 100% 0 0); opacity: 0; }
+}
 @keyframes card-spin {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
