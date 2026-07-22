@@ -25,6 +25,13 @@ export function HeroRobot() {
   const [ready, setReady] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
+  const revealTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (revealTimer.current) clearTimeout(revealTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -70,15 +77,8 @@ export function HeroRobot() {
 
   return (
     <div ref={boxRef} className="relative h-[340px] w-full sm:h-[420px] lg:h-[500px] xl:h-[560px]">
-      {/* loader until the scene is ready */}
-      {!ready && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="loader" />
-        </div>
-      )}
-
       <div
-        className={`h-full w-full transition-opacity duration-700 ease-out ${
+        className={`h-full w-full transition-opacity duration-[900ms] ease-out ${
           ready ? "opacity-100" : "opacity-0"
         }`}
         style={{ WebkitMaskImage: EDGE_MASK, maskImage: EDGE_MASK }}
@@ -94,7 +94,10 @@ export function HeroRobot() {
               const a = app as unknown as { setBackgroundColor?: (c: string) => void };
               a.setBackgroundColor?.("rgba(0,0,0,0)");
             } catch {}
-            setReady(true);
+            // Warm-up: keep the canvas invisible for a few frames while the
+            // shaders compile and the first heavy frames render, THEN fade in.
+            // This hides the post-load stutter entirely.
+            revealTimer.current = window.setTimeout(() => setReady(true), 400);
           }}
         />
       </div>
