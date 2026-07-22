@@ -29,7 +29,7 @@ export function AvailabilityBadge() {
         <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
       </span>
       <span>
-        {az ? "İşə açığam" : "Open to work"} · {az ? "Bakı" : "Baku"} {time || "—:—"} ·{" "}
+        {az ? "İşə açığam" : "Open to work"} · {az ? "Bakı" : "Baku"} {time || "--:--"} ·{" "}
         {az ? "adətən 30 dəqiqə içində cavab" : "usually replies within 30 minutes"}
       </span>
     </div>

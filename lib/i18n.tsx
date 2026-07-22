@@ -16,7 +16,7 @@ const DICT = {
       projects: "Projects", github: "GitHub", contact: "Contact",
     },
     cta: {
-      letsTalk: "Let's Talk",
+      letsTalk: "Contact Me",
       viewProjects: "View Projects",
       downloadCV: "Download CV",
       contactMe: "Contact Me",
@@ -25,7 +25,6 @@ const DICT = {
       code: "Code",
     },
     hero: {
-      eyebrow: "Frontend Developer · Azerbaijan",
       headlines: [
         { lead: "I turn ideas into ", mark: "memorable", tail: " websites." },
         { lead: "Every pixel here has a ", mark: "purpose", tail: "." },
@@ -49,7 +48,7 @@ const DICT = {
         design: { title: "Design-minded", desc: "Care about craft & detail." },
       },
       timeline: {
-        "2025": { title: "Graduated DIV Academy", place: "Junior Frontend Developer", desc: "Finished the program — now building real projects with React, Next.js and TypeScript." },
+        "2025": { title: "Graduated DIV Academy", place: "Junior Frontend Developer", desc: "Finished the program. Now building real projects with React, Next.js and TypeScript." },
         "2024": { title: "Started DIV Academy", place: "Frontend track", desc: "Learned HTML, CSS, JavaScript, React and a modern frontend workflow." },
         "UNEC": { title: "Business Administration", place: "Azerbaijan State University of Economics (UNEC)", desc: "University education that pairs business thinking with technology." },
       },
@@ -62,7 +61,7 @@ const DICT = {
     services: {
       tag: "SERVICES",
       title: "What I can do for you",
-      subtitle: "End-to-end product development — from first pixel to production.",
+      subtitle: "End-to-end product development, from first pixel to production.",
       items: {
         web: { title: "Web Development", desc: "End-to-end web apps built for scale, speed and reliability." },
         frontend: { title: "Frontend", desc: "Pixel-perfect, accessible interfaces with buttery interactions." },
@@ -92,7 +91,7 @@ const DICT = {
     contact: {
       tag: "CONTACT",
       title: "Let's build something",
-      subtitle: "Have a project in mind? Drop a message — I usually reply within a day.",
+      subtitle: "Have a project in mind? Drop a message. I usually reply within 30 minutes.",
       getInTouch: "Get in touch",
       availability: "Available for freelance & full-time.",
       name: "Your name",
@@ -127,7 +126,7 @@ const DICT = {
       projects: "Layihələr", github: "GitHub", contact: "Əlaqə",
     },
     cta: {
-      letsTalk: "Danışaq",
+      letsTalk: "Əlaqə saxla",
       viewProjects: "Layihələrə bax",
       downloadCV: "CV yüklə",
       contactMe: "Əlaqə saxla",
@@ -136,7 +135,6 @@ const DICT = {
       code: "Kod",
     },
     hero: {
-      eyebrow: "Frontend Developer · Azərbaycan",
       headlines: [
         { lead: "Fikirləri ", mark: "yaddaqalan", tail: " saytlara çevirirəm." },
         { lead: "Hər piksel burada bir ", mark: "məqsədə", tail: " xidmət edir." },
@@ -147,7 +145,7 @@ const DICT = {
         { lead: "Brendini onlayn ", mark: "canlandırıram", tail: "." },
       ],
       roles: ["Frontend Developer", "React Developer", "Next.js Developer", "UI Həvəskarı"],
-      desc: "Junior frontend developerəm — React, Next.js və TypeScript ilə real, təmiz veb interfeyslər qururam.",
+      desc: "Junior frontend developerəm. React, Next.js və TypeScript ilə real, təmiz veb interfeyslər qururam.",
     },
     about: {
       tag: "HAQQIMDA",
@@ -160,7 +158,7 @@ const DICT = {
         design: { title: "Dizayn həssaslığı", desc: "Detala və keyfiyyətə önəm verirəm." },
       },
       timeline: {
-        "2025": { title: "DIV Academy-ni bitirdim", place: "Junior Frontend Developer", desc: "Proqramı bitirdim — indi React, Next.js və TypeScript ilə real layihələr qururam." },
+        "2025": { title: "DIV Academy-ni bitirdim", place: "Junior Frontend Developer", desc: "Proqramı bitirdim. İndi React, Next.js və TypeScript ilə real layihələr qururam." },
         "2024": { title: "DIV Academy-yə başladım", place: "Frontend istiqaməti", desc: "HTML, CSS, JavaScript, React və müasir frontend iş axınını öyrəndim." },
         "UNEC": { title: "Biznesin idarə edilməsi", place: "Azərbaycan Dövlət İqtisad Universiteti (UNEC)", desc: "Biznes təfəkkürünü texnologiya ilə birləşdirən universitet təhsili." },
       },
@@ -173,7 +171,7 @@ const DICT = {
     services: {
       tag: "XİDMƏTLƏR",
       title: "Sizin üçün nə edə bilərəm",
-      subtitle: "Baş-ayaq məhsul inkişafı — ilk pikseldən istehsala qədər.",
+      subtitle: "Baş-ayaq məhsul inkişafı, ilk pikseldən istehsala qədər.",
       items: {
         web: { title: "Veb İnkişaf", desc: "Miqyas, sürət və etibarlılıq üçün qurulmuş veb tətbiqlər." },
         frontend: { title: "Frontend", desc: "Piksel dəqiqliyində, əlçatan və rəvan interfeyslər." },
@@ -203,7 +201,7 @@ const DICT = {
     contact: {
       tag: "ƏLAQƏ",
       title: "Gəlin birlikdə quraq",
-      subtitle: "Layihə fikriniz var? Mesaj yazın — adətən bir gün ərzində cavab verirəm.",
+      subtitle: "Layihə fikriniz var? Mesaj yazın, adətən 30 dəqiqə içində cavab verirəm.",
       getInTouch: "Əlaqə saxlayın",
       availability: "Frilans və tam ştat üçün əlçatanam.",
       name: "Adınız",

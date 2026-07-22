@@ -41,20 +41,20 @@ export function GithubStats() {
     return () => controller.abort();
   }, []);
   const stats = [
-    { icon: BookMarked, label: t.github.stats.repos, value: user?.public_repos ?? "—" },
-    { icon: Star, label: t.github.stats.stars, value: error ? "—" : totalStars },
-    { icon: Users, label: t.github.stats.followers, value: user?.followers ?? "—" },
-    { icon: GitFork, label: t.github.stats.following, value: user?.following ?? "—" },
+    { icon: BookMarked, label: t.github.stats.repos, value: user?.public_repos ?? "…" },
+    { icon: Star, label: t.github.stats.stars, value: error ? "…" : totalStars },
+    { icon: Users, label: t.github.stats.followers, value: user?.followers ?? "…" },
+    { icon: GitFork, label: t.github.stats.following, value: user?.following ?? "…" },
   ];
 
   return (
     <section id="github" className="section-anchor relative mx-auto max-w-6xl px-6 py-28">
-      <SectionHeader tag={t.github.tag} title={t.github.title}
+      <SectionHeader title={t.github.title}
         subtitle={`${t.github.subtitlePrefix} @${PROFILE.github}`} />
 
       {error && (
         <p className="mb-8 text-center text-sm text-muted">
-          {t.github.error} <code className="text-primary">PROFILE.github</code> — <code>lib/data.ts</code>.
+          {t.github.error} <code className="text-primary">PROFILE.github</code> · <code>lib/data.ts</code>.
         </p>
       )}
 

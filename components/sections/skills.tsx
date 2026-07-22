@@ -27,7 +27,7 @@ export function Skills() {
   const { t } = useLang();
   return (
     <section id="skills" className="section-anchor relative mx-auto max-w-6xl px-6 py-28">
-      <SectionHeader tag={t.skills.tag} title={t.skills.title} subtitle={t.skills.subtitle} />
+      <SectionHeader title={t.skills.title} subtitle={t.skills.subtitle} />
 
       <div className="mb-12">
         <Marquee items={MARQUEE} />

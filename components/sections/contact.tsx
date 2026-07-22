@@ -79,8 +79,8 @@ export function Contact() {
               className="mt-3 block text-sm text-muted transition hover:text-primary">
               {PROFILE.email}
             </a>
-            <div className="mt-4 flex items-center gap-2 text-xs uppercase tracking-widest text-primary">
-              <FaWhatsapp size={14} /> WhatsApp
+            <div className="mt-4 flex items-center gap-2 text-sm font-medium text-primary">
+              <FaWhatsapp size={15} /> WhatsApp
             </div>
             {PROFILE.whatsapp.map((w) => (
               <a key={w.number} href={`https://wa.me/${w.number}`} target="_blank" rel="noopener noreferrer"

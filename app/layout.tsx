@@ -26,15 +26,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
   title: {
-    default: "SS Developer — Junior Frontend Developer",
+    default: "SS Developer · Junior Frontend Developer",
     template: "%s · SS Developer",
   },
   description:
-    "Portfolio of SS Developer — a junior frontend developer building clean, modern web experiences with React, Next.js & TypeScript.",
+    "Portfolio of SS Developer, a junior frontend developer building clean, modern web experiences with React, Next.js & TypeScript.",
   keywords: ["Junior Frontend Developer", "Next.js", "React", "TypeScript", "Web Developer", "ssweb.dev"],
   authors: [{ name: "SS Developer" }],
   openGraph: {
-    title: "SS Developer — Junior Frontend Developer",
+    title: "SS Developer · Junior Frontend Developer",
     description: "Clean, modern web experiences built with React, Next.js & TypeScript.",
     type: "website",
   },

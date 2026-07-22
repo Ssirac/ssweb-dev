@@ -6,7 +6,7 @@ export function GlowCard({ children, className }: { children: ReactNode; classNa
   const ref = useRef<HTMLDivElement>(null);
   const [p, setP] = useState({ x: 50, y: 50, o: 0 });
   return (
-    <div className="group relative rounded-3xl">
+    <div className="group relative h-full rounded-3xl">
       {/* rotating conic glow border — appears on hover */}
       <div className="pointer-events-none absolute -inset-px overflow-hidden rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <div

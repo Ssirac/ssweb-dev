@@ -183,10 +183,7 @@ export function RunnerGame() {
   return (
     <section className="relative mx-auto max-w-2xl px-6 py-16">
       <div className="mb-5 text-center">
-        <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-          {az ? "Fasilə" : "Coffee break"}
-        </span>
-        <h2 className="mt-2 font-display text-2xl font-bold text-ink md:text-3xl">
+        <h2 className="font-display text-2xl font-bold text-ink md:text-3xl">
           {az ? "Tullan və maneələrdən qaç 🎮" : "Jump the obstacles 🎮"}
         </h2>
       </div>

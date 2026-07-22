@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { HeroLogo3D } from "../hero-logo-3d";
 import { Magnetic } from "../ui/magnetic";
@@ -69,19 +69,21 @@ export function Hero() {
   }, [count]);
   const headline = t.hero.headlines[hi % count];
 
-  // Scroll-driven 3D: the robot panel recedes/tilts as the hero scrolls away.
+  // Scroll-driven depth: spring-smoothed so the robot panel glides instead of
+  // tracking the scrollbar 1:1. No rotateX: perspective transforms on a large
+  // WebGL canvas are expensive to composite.
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const panelY = useTransform(scrollYProgress, [0, 1], [0, -70]);
-  const panelRotate = useTransform(scrollYProgress, [0, 1], [0, 12]);
-  const panelScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const panelOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.45]);
+  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.6 });
+  const panelY = useTransform(smooth, [0, 1], [0, -70]);
+  const panelScale = useTransform(smooth, [0, 1], [1, 0.92]);
+  const panelOpacity = useTransform(smooth, [0, 0.85], [1, 0.45]);
 
   return (
     <section
       ref={heroRef}
       id="hero"
-      className="section-anchor relative flex min-h-screen flex-col justify-center px-6 pt-28 pb-20 md:px-12 lg:px-20"
+      className="section-anchor relative flex min-h-[100dvh] flex-col justify-center px-6 pt-28 pb-20 md:px-12 lg:px-20"
     >
       {/* generated indigo-waves backdrop (Higgsfield) with legibility overlay */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -103,10 +105,6 @@ export function Hero() {
           <motion.div {...fade(0)} className="mb-8">
             <HeroLogo3D size={84} />
           </motion.div>
-
-          <motion.p {...fade(0.05)} className="font-mono text-xs uppercase tracking-[0.32em] text-primary">
-            {t.hero.eyebrow}
-          </motion.p>
 
           <div className="relative mt-6 flex min-h-[5rem] max-w-4xl items-start overflow-hidden sm:min-h-[6.5rem] md:min-h-[8rem] lg:min-h-[9rem]">
             <AnimatePresence mode="wait">
@@ -164,10 +162,8 @@ export function Hero() {
         </div>
 
         {/* right — cursor-following Spline robot (parallax depth on scroll) */}
-        <motion.div {...fade(0.6)} className="hidden w-full lg:block lg:justify-self-end">
-          <motion.div
-            style={{ y: panelY, rotateX: panelRotate, scale: panelScale, opacity: panelOpacity, transformPerspective: 1200 }}
-          >
+        <motion.div {...fade(0.6)} className="w-full lg:justify-self-end">
+          <motion.div style={{ y: panelY, scale: panelScale, opacity: panelOpacity }}>
             <HeroRobot />
           </motion.div>
         </motion.div>

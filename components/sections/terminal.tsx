@@ -54,10 +54,10 @@ export function Terminal() {
           : ["Hey there! 👋 Type `help` to see what I can do."];
       case "help":
         return az
-          ? ["Əmrlər: help, about, skills, projects, services, github, socials, contact, game, whoami, ls, neofetch, date, echo, theme, clear", "(Azərbaycanca da: kömək, haqqında, layihələr, xidmətlər, oyun…) — ↑/↓ ilə əvvəlki əmrlər)"]
+          ? ["Əmrlər: help, about, skills, projects, services, github, socials, contact, game, whoami, ls, neofetch, date, echo, theme, clear", "(Azərbaycanca da: kömək, haqqında, layihələr, xidmətlər, oyun…) (↑/↓ ilə əvvəlki əmrlər)"]
           : ["Available: help, about, skills, projects, services, github, socials, contact, game, whoami, ls, neofetch, date, echo, theme, clear", "(Use ↑/↓ for command history)"];
       case "whoami":
-        return [`${PROFILE.name} — Junior Frontend Developer (Azerbaijan)`];
+        return [`${PROFILE.name} - Junior Frontend Developer (Azerbaijan)`];
       case "about":
         return az
           ? ["DIV Academy məzunu. React, Next.js və TypeScript ilə real veb interfeyslər qururam."]
@@ -65,7 +65,7 @@ export function Terminal() {
       case "skills":
         return [SKILLS.map((s) => s.name).join(", ")];
       case "projects":
-        return ["1) MZ Personalvermittlung — recruitment site", "2) Original Brands Baku — e-commerce catalog", "→ /projects"];
+        return ["1) MZ Personalvermittlung - recruitment site", "2) Original Brands Baku - e-commerce catalog", "→ /projects"];
       case "socials":
         return [`GitHub:    ${PROFILE.socials.github}`, `LinkedIn:  ${PROFILE.socials.linkedin}`, `Instagram: ${PROFILE.socials.instagram}`];
       case "contact":
@@ -80,8 +80,8 @@ export function Terminal() {
           : ["Frontend development · responsive UI · landing pages · performance. → /services"];
       case "education":
         return az
-          ? ["UNEC — Biznesin idarə edilməsi", "DIV Academy — Frontend proqramı"]
-          : ["UNEC — Business Administration", "DIV Academy — Frontend program"];
+          ? ["UNEC - Biznesin idarə edilməsi", "DIV Academy - Frontend proqramı"]
+          : ["UNEC - Business Administration", "DIV Academy - Frontend program"];
       case "github":
         return [PROFILE.socials.github];
       case "date":
@@ -110,7 +110,7 @@ export function Terminal() {
       case "clear":
         return ["__clear__"];
       default:
-        return [az ? `əmr tapılmadı: ${cmd} — 'help' yaz` : `command not found: ${cmd} — try 'help'`];
+        return [az ? `əmr tapılmadı: ${cmd}. 'help' yaz` : `command not found: ${cmd}. try 'help'`];
     }
   };
 
@@ -147,7 +147,7 @@ export function Terminal() {
           <span className="h-3 w-3 rounded-full bg-red-400/70" />
           <span className="h-3 w-3 rounded-full bg-yellow-400/70" />
           <span className="h-3 w-3 rounded-full bg-green-400/70" />
-          <span className="ml-2 font-mono text-xs text-muted">ssweb.dev — zsh</span>
+          <span className="ml-2 font-mono text-xs text-muted">ssweb.dev - zsh</span>
         </div>
         <div ref={bodyRef} className="h-64 overflow-y-auto p-4 font-mono text-sm leading-relaxed">
           {history.map((l, i) => (

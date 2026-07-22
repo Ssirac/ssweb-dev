@@ -91,8 +91,8 @@ export const PROJECTS = [
       en: "AI-powered recruitment automation platform connecting Azerbaijani hospitality/trade candidates with German employers, surfacing visa-sponsorship-friendly companies.",
     },
     about: {
-      az: "Sistem açıq iş mənbələrindən canlı vakansiyaları toplayır, işəgötürənləri sponsorluq ehtimalına görə qiymətləndirir, namizəd CV-lərini Claude ilə avtomatik parse edib uyğun işlərlə tutuşdurur və insan-təsdiqli avtomatik müraciətlər (email + forma) göndərir — hamısı GDPR/UWG uyğunluğu ilə, üç dildə (AZ/DE/EN).",
-      en: "The system collects live vacancies from open job sources, scores employers by sponsorship likelihood, auto-parses candidate CVs with Claude, matches them to suitable jobs and sends human-approved automated applications (email + forms) — all GDPR/UWG compliant, in three languages (AZ/DE/EN).",
+      az: "Sistem açıq iş mənbələrindən canlı vakansiyaları toplayır, işəgötürənləri sponsorluq ehtimalına görə qiymətləndirir, namizəd CV-lərini Claude ilə avtomatik parse edib uyğun işlərlə tutuşdurur və insan-təsdiqli avtomatik müraciətlər (email + forma) göndərir. Hamısı GDPR/UWG uyğunluğu ilə, üç dildə (AZ/DE/EN).",
+      en: "The system collects live vacancies from open job sources, scores employers by sponsorship likelihood, auto-parses candidate CVs with Claude, matches them to suitable jobs and sends human-approved automated applications (email + forms). All GDPR/UWG compliant, in three languages (AZ/DE/EN).",
     },
     features: {
       az: [
@@ -124,8 +124,8 @@ export const PROJECTS = [
     repo: "",
     role: { az: "Frontend Developer", en: "Frontend Developer" },
     desc: {
-      az: "Almaniyaya beynəlxalq ixtisaslı işçi və təcrübəçi qəbulu üçün çoxdilli landing sayt — xidmət kartları, addım-addım proses və əlaqə forması.",
-      en: "Multilingual landing site for placing international skilled workers and apprentices in Germany — service cards, a step-by-step process and a contact form.",
+      az: "Almaniyaya beynəlxalq ixtisaslı işçi və təcrübəçi qəbulu üçün çoxdilli landing sayt: xidmət kartları, addım-addım proses və əlaqə forması.",
+      en: "Multilingual landing site for placing international skilled workers and apprentices in Germany: service cards, a step-by-step process and a contact form.",
     },
     about: {
       az: "Almaniyadakı şirkətləri xaricdən ixtisaslı işçilərlə əlaqələndirən agentlik üçün qurulmuş marketinq saytı. Məqsəd güvən yaratmaq və müraciəti asanlaşdırmaq idi.",
@@ -147,8 +147,8 @@ export const PROJECTS = [
     repo: "",
     role: { az: "Frontend Developer", en: "Frontend Developer" },
     desc: {
-      az: "Orijinal brend geyim, ayaqqabı və aksesuar kataloqu — kateqoriyalar, seçilmiş məhsullar və birbaşa WhatsApp sifarişi.",
-      en: "Catalog storefront for original branded clothing, shoes and accessories — categories, featured products and direct WhatsApp ordering.",
+      az: "Orijinal brend geyim, ayaqqabı və aksesuar kataloqu: kateqoriyalar, seçilmiş məhsullar və birbaşa WhatsApp sifarişi.",
+      en: "Catalog storefront for original branded clothing, shoes and accessories: categories, featured products and direct WhatsApp ordering.",
     },
     about: {
       az: "Bakıda orijinal brend məhsullar satan mağaza üçün məhsul kataloqu. Ödəniş sistemi əvəzinə birbaşa WhatsApp sifarişi ilə sadə axın seçildi.",

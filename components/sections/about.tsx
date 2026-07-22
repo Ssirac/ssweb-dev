@@ -40,12 +40,26 @@ export function About() {
     <section id="about" className="section-anchor relative mx-auto max-w-6xl px-6 py-28">
       <SectionHeader tag={t.about.tag} title={t.about.title} subtitle={t.about.subtitle} />
 
-      <div className="grid gap-6 md:grid-cols-3">
-        {highlights.map((h, i) => (
+      {/* asymmetric trio: first highlight is featured, the rest stack right */}
+      <div className="grid gap-6 md:grid-cols-[1.35fr_1fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} className="md:row-span-2">
+          <GlowCard className="flex h-full flex-col justify-center p-8">
+            {(() => { const h = highlights[0]; return (
+              <>
+                <h.icon className="text-primary" size={32} />
+                <h3 className="mt-5 text-4xl font-bold text-ink"><CountUp text={h.title} /></h3>
+                <p className="mt-2 text-base text-muted">{h.desc}</p>
+              </>
+            ); })()}
+          </GlowCard>
+        </motion.div>
+        {highlights.slice(1).map((h, i) => (
           <motion.div key={h.title}
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-            <GlowCard>
+            viewport={{ once: true }} transition={{ delay: (i + 1) * 0.1 }}>
+            <GlowCard className="h-full">
               <h.icon className="text-primary" size={26} />
               <h3 className="mt-4 text-2xl font-bold text-ink"><CountUp text={h.title} /></h3>
               <p className="mt-1 text-sm text-muted">{h.desc}</p>

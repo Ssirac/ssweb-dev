@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { SnakeGame } from "@/components/sections/snake-game";
 
 export const metadata: Metadata = {
-  title: "Play — SS Developer",
-  description: "Take a break — play a quick game of Snake.",
+  title: "Play · SS Developer",
+  description: "Take a break, play a quick game of Snake.",
 };
 
 export default function PlayPage() {

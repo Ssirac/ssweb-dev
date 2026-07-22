@@ -2,17 +2,21 @@
 import { motion } from "framer-motion";
 import { ScrambleText } from "./scramble-text";
 
-export function SectionHeader({ tag, title, subtitle }: { tag: string; title: string; subtitle?: string }) {
+// `tag` is optional on purpose: the taste audit caps mono-caps eyebrows at
+// ~1 per 3 sections, so most sections pass only title + subtitle.
+export function SectionHeader({ tag, title, subtitle }: { tag?: string; title: string; subtitle?: string }) {
   return (
     <div className="mb-14 text-center">
-      <motion.span
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="font-mono text-xs uppercase tracking-[0.3em] text-primary"
-      >
-        {tag}
-      </motion.span>
+      {tag && (
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-mono text-xs uppercase tracking-[0.3em] text-primary"
+        >
+          {tag}
+        </motion.span>
+      )}
       <motion.h2
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
