@@ -76,6 +76,43 @@ export const HIGHLIGHT_KEYS = ["years", "projects", "design"] as const;
 // ─────────────────────────────────────────────────────────────────────────
 export const PROJECTS = [
   {
+    slug: "mz-talent-intelligence",
+    title: "MZ Talent Intelligence",
+    category: "Web App",
+    year: "2026",
+    image: "/projects/mzcvai.png",
+    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Claude AI", "Firecrawl", "Puppeteer", "Resend/IMAP", "next-intl", "Tailwind", "Railway"],
+    demo: "",
+    repo: "",
+    role: { az: "Full-stack Developer", en: "Full-stack Developer" },
+    desc: {
+      az: "Azərbaycanlı hospitality/ticarət namizədlərini Alman işəgötürənlərlə birləşdirən, viza-sponsorluğuna meyilli şirkətləri önə çıxaran AI-əsaslı işə-qəbul avtomatlaşdırma platforması.",
+      en: "AI-powered recruitment automation platform connecting Azerbaijani hospitality/trade candidates with German employers, surfacing visa-sponsorship-friendly companies.",
+    },
+    about: {
+      az: "Sistem açıq iş mənbələrindən canlı vakansiyaları toplayır, işəgötürənləri sponsorluq ehtimalına görə qiymətləndirir, namizəd CV-lərini Claude ilə avtomatik parse edib uyğun işlərlə tutuşdurur və insan-təsdiqli avtomatik müraciətlər (email + forma) göndərir — hamısı GDPR/UWG uyğunluğu ilə, üç dildə (AZ/DE/EN).",
+      en: "The system collects live vacancies from open job sources, scores employers by sponsorship likelihood, auto-parses candidate CVs with Claude, matches them to suitable jobs and sends human-approved automated applications (email + forms) — all GDPR/UWG compliant, in three languages (AZ/DE/EN).",
+    },
+    features: {
+      az: [
+        "Çoxmənbəli vakansiya toplama (API-lər + Firecrawl web-scraping)",
+        "Semantik uyğunlaşma (embedding) + sponsorluq-yönümlü skorlama",
+        "Claude ilə CV parse + alman dilində fərdi müraciət məktubları",
+        "Avtomatik forma doldurma (headless brauzer) + email göndərmə",
+        "IMAP ilə işəgötürən cavablarının izlənməsi",
+        "Admin autentifikasiya, CSP, CSRF, audit log",
+      ],
+      en: [
+        "Multi-source vacancy collection (APIs + Firecrawl web scraping)",
+        "Semantic matching (embeddings) + sponsorship-oriented scoring",
+        "CV parsing with Claude + personalized German cover letters",
+        "Automated form filling (headless browser) + email sending",
+        "Employer reply tracking via IMAP",
+        "Admin authentication, CSP, CSRF, audit log",
+      ],
+    },
+  },
+  {
     slug: "mz-personalvermittlung",
     title: "MZ Personalvermittlung",
     category: "Web App",
