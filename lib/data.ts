@@ -53,7 +53,7 @@ export const SERVICES = [
 ] as const;
 
 // `year` also acts as the translation key (see about.timeline in i18n.tsx).
-export const TIMELINE = ["2025", "2024"] as const;
+export const TIMELINE = ["2025", "2024", "UNEC"] as const;
 
 export const HIGHLIGHT_KEYS = ["years", "projects", "design"] as const;
 
