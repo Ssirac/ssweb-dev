@@ -81,6 +81,7 @@ export const PROJECTS = [
     category: "Web App",
     year: "2026",
     image: "/projects/mzcvai.png",
+    fit: "contain", // wide dashboard screenshot — show it whole, don't crop
     tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Claude AI", "Firecrawl", "Puppeteer", "Resend/IMAP", "next-intl", "Tailwind", "Railway"],
     demo: "",
     repo: "",
