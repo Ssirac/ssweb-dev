@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { HeroLogo3D } from "../hero-logo-3d";
 import { Magnetic } from "../ui/magnetic";
@@ -69,19 +69,10 @@ export function Hero() {
   }, [count]);
   const headline = t.hero.headlines[hi % count];
 
-  // Scroll-driven depth: spring-smoothed so the robot panel glides instead of
-  // tracking the scrollbar 1:1. No rotateX: perspective transforms on a large
-  // WebGL canvas are expensive to composite.
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.6 });
-  const panelY = useTransform(smooth, [0, 1], [0, -70]);
-  const panelScale = useTransform(smooth, [0, 1], [1, 0.92]);
-  const panelOpacity = useTransform(smooth, [0, 0.85], [1, 0.45]);
-
+  // No scroll parallax on the robot: per-frame transforms of a large WebGL
+  // canvas layer were the main desktop scroll-jank source.
   return (
     <section
-      ref={heroRef}
       id="hero"
       className="section-anchor relative flex min-h-[100dvh] flex-col justify-center px-6 pt-28 pb-20 md:px-12 lg:px-20"
     >
@@ -161,11 +152,9 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* right — cursor-following Spline robot (parallax depth on scroll) */}
+        {/* right — cursor-following Spline robot */}
         <motion.div {...fade(0.6)} className="w-full lg:justify-self-end">
-          <motion.div style={{ y: panelY, scale: panelScale, opacity: panelOpacity }}>
-            <HeroRobot />
-          </motion.div>
+          <HeroRobot />
         </motion.div>
       </div>
     </section>
