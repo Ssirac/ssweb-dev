@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
-import { HeroLogo3D } from "../hero-logo-3d";
+import { LogoCoin } from "../ui/logo-coin";
 import { Magnetic } from "../ui/magnetic";
 import { AvailabilityBadge } from "../ui/availability-badge";
 import { useLang } from "@/lib/i18n";
@@ -70,7 +70,7 @@ export function Hero() {
   const count = t.hero.headlines.length;
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setHi((n) => (n + 1) % count), 3800);
+    const id = setInterval(() => setHi((n) => (n + 1) % count), 5000);
     return () => clearInterval(id);
   }, [count]);
   const headline = t.hero.headlines[hi % count];
@@ -100,17 +100,17 @@ export function Hero() {
         {/* left — copy */}
         <div>
           <motion.div {...fade(0)} className="mb-8">
-            <HeroLogo3D size={84} />
+            <LogoCoin size={84} />
           </motion.div>
 
           <div className="relative mt-6 flex min-h-[5rem] max-w-4xl items-start overflow-hidden sm:min-h-[6.5rem] md:min-h-[8rem] lg:min-h-[9rem]">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={hi}
-                initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0.4 }}
-                animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
-                exit={{ clipPath: "inset(0 0 0 100%)", opacity: 0.4 }}
-                transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.45, ease: "easeInOut" }}
                 className="font-display text-[2rem] font-bold leading-[1.1] tracking-tight text-ink sm:text-[2.6rem] md:text-5xl lg:text-[2.7rem] xl:text-[3rem]"
               >
                 {headline.lead}

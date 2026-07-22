@@ -18,20 +18,17 @@ const LINES = [
   "npm run build && deploy();",
 ];
 
-// scattered placements: top/left %, cycle duration s, delay s
+// scattered placements: top/left %, cycle duration s, delay s.
+// Kept to 7 slow lines: every clip-path step is a repaint, so fewer lines
+// with longer cycles ≈ half the constant paint work of the original 12.
 const PLACES = [
-  { top: "6%",  left: "3%",  dur: 16, delay: 0 },
-  { top: "14%", left: "58%", dur: 21, delay: 3 },
-  { top: "24%", left: "22%", dur: 18, delay: 6 },
-  { top: "32%", left: "72%", dur: 15, delay: 1.5 },
-  { top: "42%", left: "6%",  dur: 22, delay: 8 },
-  { top: "50%", left: "48%", dur: 17, delay: 4.5 },
-  { top: "60%", left: "68%", dur: 20, delay: 10 },
-  { top: "68%", left: "14%", dur: 16, delay: 2 },
-  { top: "76%", left: "44%", dur: 23, delay: 7 },
-  { top: "84%", left: "70%", dur: 18, delay: 12 },
-  { top: "90%", left: "8%",  dur: 21, delay: 5 },
-  { top: "38%", left: "34%", dur: 19, delay: 14 },
+  { top: "6%",  left: "3%",  dur: 24, delay: 0 },
+  { top: "16%", left: "58%", dur: 30, delay: 4 },
+  { top: "32%", left: "72%", dur: 26, delay: 2 },
+  { top: "44%", left: "6%",  dur: 32, delay: 9 },
+  { top: "58%", left: "48%", dur: 25, delay: 6 },
+  { top: "74%", left: "14%", dur: 28, delay: 12 },
+  { top: "86%", left: "66%", dur: 31, delay: 3 },
 ];
 
 export function CodeTyping() {
