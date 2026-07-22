@@ -12,6 +12,7 @@ import { ShortcutsOverlay } from "@/components/shortcuts-overlay";
 import { Grid } from "@/components/background/grid";
 import { Spotlight } from "@/components/background/spotlight";
 import { Aurora } from "@/components/background/aurora";
+import { CodeTyping } from "@/components/background/code-typing";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/sections/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Aurora />
           <Grid />
           <Spotlight />
+          <CodeTyping />
           <Navbar />
           <main id="main" className="relative z-10">{children}</main>
           <Footer />
