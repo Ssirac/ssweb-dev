@@ -150,8 +150,15 @@ body {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
+/* Spins ONLY while the card is hovered: a dozen always-running conic layers
+   were a constant compositing cost across the page. */
+.card-spin-layer {
+  animation: card-spin 4.5s linear infinite;
+  animation-play-state: paused;
+}
+.group:hover .card-spin-layer { animation-play-state: running; }
 @media (prefers-reduced-motion: reduce) {
-  [style*="card-spin"] { animation: none !important; }
+  .card-spin-layer, [style*="card-spin"] { animation: none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
