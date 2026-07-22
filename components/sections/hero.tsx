@@ -7,7 +7,6 @@ import { ArrowRight, Mail } from "lucide-react";
 import { HeroLogo3D } from "../hero-logo-3d";
 import { Magnetic } from "../ui/magnetic";
 import { AvailabilityBadge } from "../ui/availability-badge";
-import { CodeTyping } from "../background/code-typing";
 import { useLang } from "@/lib/i18n";
 
 // Lazy: keeps the 3D video (and three) out of the initial hero payload.
@@ -97,9 +96,6 @@ export function Hero() {
       id="hero"
       className="section-anchor relative flex min-h-screen flex-col justify-center px-6 pt-28 pb-20 md:px-12 lg:px-20"
     >
-      {/* code being "written" backdrop */}
-      <CodeTyping />
-
       {/* generated indigo-waves backdrop (Higgsfield) with legibility overlay */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}

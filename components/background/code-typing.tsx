@@ -1,7 +1,7 @@
-// Ambient "code being written" layer for the hero — faint monospace lines that
-// type themselves out (clip-path steps → paint-only, no layout, no re-renders),
-// hold, fade and retype on independent cycles. Desktop only; hidden for
-// reduced motion.
+// Global "code being written" layer — faint monospace lines that type
+// themselves out (clip-path steps → paint-only, no layout, no re-renders),
+// hold, fade and retype on independent cycles, fixed behind every section.
+// Desktop only; hidden for reduced motion.
 
 const LINES = [
   "const build = () => ship(idea);",
@@ -38,7 +38,7 @@ export function CodeTyping() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden opacity-[0.13] [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] motion-reduce:hidden md:block"
+      className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden opacity-[0.13] [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] motion-reduce:hidden md:block"
     >
       {PLACES.map((p, i) => (
         <span
