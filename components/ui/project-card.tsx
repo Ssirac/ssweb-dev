@@ -53,14 +53,14 @@ export function ProjectCard({ p }: { p: Project }) {
       style={{ rotateX, rotateY, transformPerspective: 900 }}
       className="group relative overflow-hidden rounded-3xl glass glass-accent shadow-premium transition-[box-shadow,border-color] duration-300 ease-out [transform-style:preserve-3d] hover:border-primary/30 hover:shadow-glow-lg"
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className={`relative aspect-[16/10] overflow-hidden ${"fit" in p && p.fit === "contain" ? "bg-background/70" : ""}`}>
         <Image
           src={p.image}
           alt={p.title}
           fill
           priority
           sizes="(max-width:768px) 100vw, 50vw"
-          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+          className={`${"fit" in p && p.fit === "contain" ? "object-contain" : "object-cover object-top"} transition-transform duration-700 ease-out group-hover:scale-105`}
         />
         {/* bottom fade so the action buttons stay legible */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

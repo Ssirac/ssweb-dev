@@ -35,9 +35,9 @@ export function ProjectDetail({ project: p }: { project: Project }) {
         )}
 
         <div className="mt-10 overflow-hidden rounded-3xl glass shadow-premium">
-          <div className="relative aspect-[16/10]">
+          <div className={`relative aspect-[16/10] ${"fit" in p && p.fit === "contain" ? "bg-background/70" : ""}`}>
             <Image src={p.image} alt={p.title} fill priority sizes="(max-width:768px) 100vw, 900px"
-              className="object-cover object-top" />
+              className={"fit" in p && p.fit === "contain" ? "object-contain" : "object-cover object-top"} />
           </div>
         </div>
 
