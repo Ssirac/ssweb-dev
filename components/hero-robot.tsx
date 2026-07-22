@@ -1,12 +1,14 @@
 "use client";
 
-// Cursor-following Spline robot for the hero. Perf notes:
-// - the ~3MB scene file is preloaded in parallel with the Spline JS chunk,
-//   so slow (mobile) networks don't pay for them sequentially;
-// - the scene is stopped whenever the hero is off-screen, freeing the GPU
-//   for the rest of the page (this was the desktop scroll-jank source);
-// - no scroll parallax on the canvas: per-frame transforms of a large WebGL
-//   layer are expensive to composite.
+// Cursor-following Spline robot for the hero. Rendered frameless: the scene's
+// own background is cleared when the runtime allows it, and the canvas edges
+// are faded out with a radial mask so the robot reads as part of the page
+// backdrop instead of a boxed panel.
+//
+// Perf notes:
+// - the ~3MB scene file is preloaded in parallel with the Spline JS chunk;
+// - the scene is stopped whenever the hero is off-screen (GPU freed);
+// - no scroll parallax: per-frame transforms of a large WebGL layer jank.
 
 import { useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
@@ -14,6 +16,9 @@ import type { Application } from "@splinetool/runtime";
 import { SplineScene } from "@/components/ui/splite";
 
 const SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
+
+// Fade the canvas edges into the page so no rectangle is visible.
+const EDGE_MASK = "radial-gradient(78% 72% at 50% 50%, #000 52%, transparent 97%)";
 
 export function HeroRobot() {
   const [enabled, setEnabled] = useState(false);
@@ -64,20 +69,7 @@ export function HeroRobot() {
   if (!enabled) return null;
 
   return (
-    <div
-      ref={boxRef}
-      className="relative h-[320px] w-full overflow-hidden rounded-3xl sm:h-[400px] lg:h-[480px] xl:h-[540px]"
-      style={{ boxShadow: "0 30px 90px -30px rgba(69,80,245,0.45)" }}
-    >
-      {/* indigo light behind the robot */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(65% 60% at 50% 45%, rgba(69,80,245,0.30), transparent 72%)",
-        }}
-      />
-
+    <div ref={boxRef} className="relative h-[340px] w-full sm:h-[420px] lg:h-[500px] xl:h-[560px]">
       {/* loader until the scene is ready */}
       {!ready && (
         <div className="absolute inset-0 flex items-center justify-center">
@@ -89,12 +81,19 @@ export function HeroRobot() {
         className={`h-full w-full transition-opacity duration-700 ease-out ${
           ready ? "opacity-100" : "opacity-0"
         }`}
+        style={{ WebkitMaskImage: EDGE_MASK, maskImage: EDGE_MASK }}
       >
         <SplineScene
           scene={SCENE}
           className="h-full w-full"
           onLoad={(app) => {
             appRef.current = app;
+            // Clear the scene's baked background if the runtime supports it,
+            // so the page backdrop shows through behind the robot.
+            try {
+              const a = app as unknown as { setBackgroundColor?: (c: string) => void };
+              a.setBackgroundColor?.("rgba(0,0,0,0)");
+            } catch {}
             setReady(true);
           }}
         />
