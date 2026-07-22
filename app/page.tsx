@@ -8,7 +8,6 @@ import { GithubStats } from "@/components/sections/github";
 import { RunnerGame } from "@/components/sections/runner-game";
 import { Terminal } from "@/components/sections/terminal";
 import { Contact } from "@/components/sections/contact";
-import { SplineShowcase } from "@/components/sections/spline-showcase";
 
 export default function Home() {
   return (
@@ -20,7 +19,6 @@ export default function Home() {
       <Services />
       <Projects />
       <GithubStats />
-      <SplineShowcase />
       <RunnerGame />
       <Terminal />
       <Contact />

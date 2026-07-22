@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { SectionHeader } from "../ui/section-header";
 import { GlowCard } from "../ui/glow-card";
 import { CountUp } from "../ui/count-up";
@@ -8,6 +9,25 @@ import { useLang } from "@/lib/i18n";
 import { Sparkles, Rocket, Heart } from "lucide-react";
 
 const HIGHLIGHT_ICONS = { years: Sparkles, projects: Rocket, design: Heart } as const;
+
+// Brand motion clip (moved here from the hero). Native video, poster while loading.
+const HeroVideo3D = dynamic(
+  () => import("../HeroVideo3D").then((m) => m.HeroVideo3D),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/videos/ss-hero-poster.jpg"
+          alt=""
+          aria-hidden
+          className="h-full w-full object-cover opacity-80"
+        />
+      </div>
+    ),
+  },
+);
 
 export function About() {
   const { t } = useLang();
@@ -33,6 +53,17 @@ export function About() {
           </motion.div>
         ))}
       </div>
+
+      {/* brand motion clip */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.6 }}
+        className="mx-auto mt-16 max-w-3xl"
+      >
+        <HeroVideo3D />
+      </motion.div>
 
       <div className="mt-16">
         <h3 className="mb-8 text-center font-mono text-sm tracking-widest text-muted">{t.about.timelineTitle}</h3>

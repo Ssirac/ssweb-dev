@@ -9,23 +9,10 @@ import { Magnetic } from "../ui/magnetic";
 import { AvailabilityBadge } from "../ui/availability-badge";
 import { useLang } from "@/lib/i18n";
 
-// Lazy: keeps the 3D video (and three) out of the initial hero payload.
-const HeroVideo3D = dynamic(
-  () => import("../HeroVideo3D").then((m) => m.HeroVideo3D),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/videos/ss-hero-poster.jpg"
-          alt=""
-          aria-hidden
-          className="h-full w-full object-cover opacity-80"
-        />
-      </div>
-    ),
-  },
+// Lazy: keeps the Spline runtime out of the initial hero payload.
+const HeroRobot = dynamic(
+  () => import("../hero-robot").then((m) => m.HeroRobot),
+  { ssr: false, loading: () => null },
 );
 
 function useTyping(words: readonly string[]) {
@@ -82,13 +69,13 @@ export function Hero() {
   }, [count]);
   const headline = t.hero.headlines[hi % count];
 
-  // Scroll-driven 3D: the video panel recedes/tilts as the hero scrolls away.
+  // Scroll-driven 3D: the robot panel recedes/tilts as the hero scrolls away.
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const vidY = useTransform(scrollYProgress, [0, 1], [0, -70]);
-  const vidRotate = useTransform(scrollYProgress, [0, 1], [0, 12]);
-  const vidScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const vidOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.45]);
+  const panelY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const panelRotate = useTransform(scrollYProgress, [0, 1], [0, 12]);
+  const panelScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const panelOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.45]);
 
   return (
     <section
@@ -176,12 +163,12 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* right — 3D video (parallax depth on scroll) */}
-        <motion.div {...fade(0.6)} className="w-full lg:justify-self-end">
+        {/* right — cursor-following Spline robot (parallax depth on scroll) */}
+        <motion.div {...fade(0.6)} className="hidden w-full lg:block lg:justify-self-end">
           <motion.div
-            style={{ y: vidY, rotateX: vidRotate, scale: vidScale, opacity: vidOpacity, transformPerspective: 1200 }}
+            style={{ y: panelY, rotateX: panelRotate, scale: panelScale, opacity: panelOpacity, transformPerspective: 1200 }}
           >
-            <HeroVideo3D />
+            <HeroRobot />
           </motion.div>
         </motion.div>
       </div>
