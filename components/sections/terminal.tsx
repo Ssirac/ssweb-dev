@@ -79,7 +79,9 @@ export function Terminal() {
           ? ["Frontend development · responsive UI · landing səhifələr · performans. → /services"]
           : ["Frontend development · responsive UI · landing pages · performance. → /services"];
       case "education":
-        return az ? ["DIV Academy — Frontend proqramı."] : ["DIV Academy — Frontend program."];
+        return az
+          ? ["UNEC — Biznesin idarə edilməsi", "DIV Academy — Frontend proqramı"]
+          : ["UNEC — Business Administration", "DIV Academy — Frontend program"];
       case "github":
         return [PROFILE.socials.github];
       case "date":

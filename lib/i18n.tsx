@@ -51,6 +51,7 @@ const DICT = {
       timeline: {
         "2025": { title: "Graduated DIV Academy", place: "Junior Frontend Developer", desc: "Finished the program — now building real projects with React, Next.js and TypeScript." },
         "2024": { title: "Started DIV Academy", place: "Frontend track", desc: "Learned HTML, CSS, JavaScript, React and a modern frontend workflow." },
+        "UNEC": { title: "Business Administration", place: "Azerbaijan State University of Economics (UNEC)", desc: "University education that pairs business thinking with technology." },
       },
     },
     skills: {
@@ -161,6 +162,7 @@ const DICT = {
       timeline: {
         "2025": { title: "DIV Academy-ni bitirdim", place: "Junior Frontend Developer", desc: "Proqramı bitirdim — indi React, Next.js və TypeScript ilə real layihələr qururam." },
         "2024": { title: "DIV Academy-yə başladım", place: "Frontend istiqaməti", desc: "HTML, CSS, JavaScript, React və müasir frontend iş axınını öyrəndim." },
+        "UNEC": { title: "Biznesin idarə edilməsi", place: "Azərbaycan Dövlət İqtisad Universiteti (UNEC)", desc: "Biznes təfəkkürünü texnologiya ilə birləşdirən universitet təhsili." },
       },
     },
     skills: {

@@ -38,7 +38,7 @@ export function CodeTyping() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden opacity-[0.13] [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] motion-reduce:hidden md:block"
+      className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden opacity-[0.22] [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] motion-reduce:hidden md:block"
     >
       {PLACES.map((p, i) => (
         <span
