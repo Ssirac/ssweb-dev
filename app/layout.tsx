@@ -11,7 +11,6 @@ import { CommandPalette } from "@/components/command-palette";
 import { ShortcutsOverlay } from "@/components/shortcuts-overlay";
 import { Grid } from "@/components/background/grid";
 import { Spotlight } from "@/components/background/spotlight";
-import { Aurora } from "@/components/background/aurora";
 import { CodeTyping } from "@/components/background/code-typing";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/sections/footer";
@@ -86,7 +85,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollProgress />
           <CommandPalette />
           <ShortcutsOverlay />
-          <Aurora />
+          {/* Aurora (fullscreen WebGL shader) disabled: it ran every frame on
+              the whole page and was the main constant GPU cost behind the
+              scroll stutter. Re-mount <Aurora /> here to restore it. */}
           <Grid />
           <Spotlight />
           <CodeTyping />

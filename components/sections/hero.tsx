@@ -54,10 +54,16 @@ const fade = (delay: number) => ({
   transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
+// Isolated leaf: the per-character typing state re-renders ONLY this span,
+// not the whole hero column (which is full of motion wrappers).
+function TypedRole({ words }: { words: readonly string[] }) {
+  const typed = useTyping(words);
+  return <span className="text-ink/80">{typed}</span>;
+}
+
 
 export function Hero() {
   const { t } = useLang();
-  const typed = useTyping(t.hero.roles);
 
   // Rotate through the headlines with a soft fade (no scramble).
   const [hi, setHi] = useState(0);
@@ -120,7 +126,7 @@ export function Hero() {
             aria-hidden
           >
             <span className="text-primary">$</span>
-            <span className="text-ink/80">{typed}</span>
+            <TypedRole words={t.hero.roles} />
             <span className="inline-block h-5 w-[2px] animate-pulse bg-primary" />
           </motion.div>
 
