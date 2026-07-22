@@ -6,6 +6,7 @@ import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { SectionHeader } from "../ui/section-header";
 import { Magnetic } from "../ui/magnetic";
+import { AvailabilityBadge } from "../ui/availability-badge";
 import { PROFILE } from "@/lib/data";
 import { fireConfetti } from "@/lib/confetti";
 import { useLang } from "@/lib/i18n";
@@ -88,6 +89,9 @@ export function Contact() {
               </a>
             ))}
             <p className="mt-4 text-sm text-muted">{t.contact.availability}</p>
+            <div className="mt-4">
+              <AvailabilityBadge />
+            </div>
           </div>
           <div className="mt-8 flex gap-3">
             {SOCIALS.map((s) => (

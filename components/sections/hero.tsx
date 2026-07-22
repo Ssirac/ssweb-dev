@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, Mail } from "lucide-react";
 import { HeroLogo3D } from "../hero-logo-3d";
 import { Magnetic } from "../ui/magnetic";
+import { AvailabilityBadge } from "../ui/availability-badge";
 import { CodeRain } from "../background/code-rain";
 import { useLang } from "@/lib/i18n";
 
@@ -172,6 +173,10 @@ export function Hero() {
                 <Mail size={17} /> {t.cta.contactMe}
               </Link>
             </Magnetic>
+          </motion.div>
+
+          <motion.div {...fade(0.55)} className="mt-6">
+            <AvailabilityBadge />
           </motion.div>
         </div>
 

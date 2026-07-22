@@ -8,6 +8,7 @@ import { PROFILE } from "@/lib/data";
 import { LanguageProvider } from "@/lib/i18n";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { CommandPalette } from "@/components/command-palette";
+import { ShortcutsOverlay } from "@/components/shortcuts-overlay";
 import { Grid } from "@/components/background/grid";
 import { Spotlight } from "@/components/background/spotlight";
 import { Aurora } from "@/components/background/aurora";
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           <ScrollProgress />
           <CommandPalette />
+          <ShortcutsOverlay />
           <Aurora />
           <Grid />
           <Spotlight />
