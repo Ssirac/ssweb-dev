@@ -8,7 +8,7 @@ import { GithubStats } from "@/components/sections/github";
 import { RunnerGame } from "@/components/sections/runner-game";
 import { Terminal } from "@/components/sections/terminal";
 import { Contact } from "@/components/sections/contact";
-import { Orb3D } from "@/components/orb-3d";
+import { SplineShowcase } from "@/components/sections/spline-showcase";
 
 export default function Home() {
   return (
@@ -20,7 +20,7 @@ export default function Home() {
       <Services />
       <Projects />
       <GithubStats />
-      <Orb3D />
+      <SplineShowcase />
       <RunnerGame />
       <Terminal />
       <Contact />
