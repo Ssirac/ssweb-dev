@@ -65,11 +65,13 @@ export function ProjectCard({ p }: { p: Project }) {
         {/* bottom fade so the action buttons stay legible */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-3 pb-5 opacity-0 transition-all duration-300 group-hover:opacity-100">
-          <a href={p.demo} target="_blank" rel="noopener noreferrer" data-cursor
-            aria-label={`${p.title} live demo`}
-            className="flex items-center gap-1.5 rounded-full bg-brand-gradient px-4 py-2 text-sm font-medium text-background shadow-glow">
-            <ExternalLink size={15} /> {t.cta.liveDemo}
-          </a>
+          {p.demo && (
+            <a href={p.demo} target="_blank" rel="noopener noreferrer" data-cursor
+              aria-label={`${p.title} live demo`}
+              className="flex items-center gap-1.5 rounded-full bg-brand-gradient px-4 py-2 text-sm font-medium text-background shadow-glow">
+              <ExternalLink size={15} /> {t.cta.liveDemo}
+            </a>
+          )}
           {p.repo && (
             <a href={p.repo} target="_blank" rel="noopener noreferrer" data-cursor
               aria-label={`${p.title} source code`}

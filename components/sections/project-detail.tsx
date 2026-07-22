@@ -27,10 +27,12 @@ export function ProjectDetail({ project: p }: { project: Project }) {
         <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-ink md:text-5xl">{p.title}</h1>
         <p className="mt-4 max-w-2xl text-muted">{p.desc[lang]}</p>
 
-        <a href={p.demo} target="_blank" rel="noopener noreferrer" data-cursor
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-gradient px-6 py-3 text-sm font-medium text-background shadow-glow transition hover:shadow-glow-lg">
-          <ExternalLink size={16} /> {t.cta.liveDemo}
-        </a>
+        {p.demo && (
+          <a href={p.demo} target="_blank" rel="noopener noreferrer" data-cursor
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-gradient px-6 py-3 text-sm font-medium text-background shadow-glow transition hover:shadow-glow-lg">
+            <ExternalLink size={16} /> {t.cta.liveDemo}
+          </a>
+        )}
 
         <div className="mt-10 overflow-hidden rounded-3xl glass shadow-premium">
           <div className="relative aspect-[16/10]">
