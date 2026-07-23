@@ -1,49 +1,44 @@
 "use client";
 
-// Stacked testimonial cards. Layout adapted from rxxndy's 21st.dev
-// twitter-testimonial-cards; the tweet costume is intentionally dropped
-// (no X branding, handles, dates or engagement counts) because these quotes
-// were approved directly by the clients, not posted anywhere. Renders
-// nothing until TESTIMONIALS in lib/data.ts has real entries.
+// Stacked testimonial deck with explicit controls. The active card is always
+// fully on top and readable; the rest peek out behind it, dimmed. Arrows and
+// dots (plus clicking a peeking card) switch cards — no hover mechanics,
+// which made the lower card unreadable. Renders nothing until TESTIMONIALS
+// in lib/data.ts has real entries.
 
 import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeader } from "../ui/section-header";
 import { TESTIMONIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-const OFFSETS = [
-  "translate-x-0 translate-y-0",
-  "translate-x-8 translate-y-10 sm:translate-x-16 sm:translate-y-12",
-  "translate-x-16 translate-y-20 sm:translate-x-32 sm:translate-y-24",
-];
-
 export function Testimonials() {
   const { lang } = useLang();
-  const [active, setActive] = useState<number | null>(null);
+  const [active, setActive] = useState(0);
   if (TESTIMONIALS.length === 0) return null;
   const az = lang === "az";
+  const count = TESTIMONIALS.length;
+
+  const prev = () => setActive((a) => (a - 1 + count) % count);
+  const next = () => setActive((a) => (a + 1) % count);
 
   return (
     <section className="relative mx-auto max-w-5xl px-6 py-24">
       <SectionHeader title={az ? "Müştərilər nə deyir" : "What clients say"} />
 
-      <div className="grid place-items-center pb-24 pt-6 [grid-template-areas:'stack']">
+      <div className="grid place-items-center pt-4 [grid-template-areas:'stack']">
         {TESTIMONIALS.map((item, i) => {
-          const isActive = active === i;
-          const otherActive = active !== null && !isActive;
+          const isActive = i === active;
           return (
             <div
               key={item.name}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
-              onClick={() => setActive(isActive ? null : i)}
-              style={{ zIndex: 10 + i }}
+              onClick={() => setActive(i)}
               className={cn(
-                "relative flex w-[300px] cursor-pointer select-none flex-col rounded-2xl glass p-5 shadow-premium transition-all duration-500 -skew-y-[6deg] sm:w-[420px] sm:p-6 [grid-area:stack]",
-                OFFSETS[i % OFFSETS.length],
-                isActive && "-rotate-1 scale-[1.03] border-primary/40 shadow-glow",
-                otherActive && "opacity-60 grayscale",
+                "flex w-[300px] cursor-pointer select-none flex-col rounded-2xl glass p-5 shadow-premium transition-all duration-500 sm:w-[440px] sm:p-6 [grid-area:stack]",
+                isActive
+                  ? "z-20 rotate-0 border-primary/30 opacity-100 shadow-glow"
+                  : "z-10 -rotate-2 translate-x-6 translate-y-6 scale-[0.97] opacity-70 grayscale sm:translate-x-10 sm:translate-y-8",
               )}
             >
               {/* header */}
@@ -66,6 +61,37 @@ export function Testimonials() {
             </div>
           );
         })}
+      </div>
+
+      {/* controls */}
+      <div className="mt-10 flex items-center justify-center gap-4">
+        <button
+          onClick={prev}
+          aria-label={az ? "Əvvəlki rəy" : "Previous review"}
+          className="flex h-10 w-10 items-center justify-center rounded-full glass text-ink transition hover:border-primary/40 hover:text-primary hover:shadow-glow"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <div className="flex gap-2">
+          {TESTIMONIALS.map((item, i) => (
+            <button
+              key={item.name}
+              onClick={() => setActive(i)}
+              aria-label={`${i + 1}`}
+              className={cn(
+                "h-2 rounded-full transition-all duration-300",
+                i === active ? "w-6 bg-primary" : "w-2 bg-ink/20 hover:bg-ink/40",
+              )}
+            />
+          ))}
+        </div>
+        <button
+          onClick={next}
+          aria-label={az ? "Növbəti rəy" : "Next review"}
+          className="flex h-10 w-10 items-center justify-center rounded-full glass text-ink transition hover:border-primary/40 hover:text-primary hover:shadow-glow"
+        >
+          <ChevronRight size={18} />
+        </button>
       </div>
     </section>
   );
