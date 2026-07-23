@@ -150,9 +150,9 @@ export function Hero() {
             <Magnetic>
               <Link
                 href="/contact"
-                className="group relative flex items-center overflow-hidden rounded-full px-6 py-3 font-medium text-white transition"
+                className="group relative flex items-center overflow-hidden rounded-full px-6 py-3 font-medium text-white shadow-glow transition hover:shadow-glow-lg"
               >
-                <LiquidGlow dim />
+                <LiquidGlow />
                 <span className="relative z-10 flex items-center gap-2">
                   <Mail size={17} /> {t.cta.contactMe}
                 </span>
