@@ -27,6 +27,7 @@ export type Testimonial = {
   quote: { az: string; en: string };
   name: string; // real ad
   role: { az: string; en: string }; // vəzifə + şirkət
+  logo?: string; // müştərinin loqosu (yoxdursa ad baş hərfi göstərilir)
 };
 // Müştərilər tərəfindən təsdiqlənib (23 iyul 2026).
 export const TESTIMONIALS: Testimonial[] = [
@@ -37,6 +38,7 @@ export const TESTIMONIALS: Testimonial[] = [
     },
     name: "Süleyman Ağazadə",
     role: { az: "Original Brands Baku, təsisçi", en: "Original Brands Baku, founder" },
+    logo: "/testimonials/ob.webp",
   },
   {
     quote: {
@@ -45,6 +47,7 @@ export const TESTIMONIALS: Testimonial[] = [
     },
     name: "MZ Personalvermittlung",
     role: { az: "Rekrutinq agentliyi, Almaniya", en: "Recruitment agency, Germany" },
+    logo: "/testimonials/mz.webp",
   },
 ];
 

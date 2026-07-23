@@ -8,8 +8,9 @@
 // everywhere. Renders nothing until TESTIMONIALS in lib/data.ts has entries.
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { SectionHeader } from "../ui/section-header";
 import { TESTIMONIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
@@ -41,10 +42,17 @@ export function Testimonials() {
       <SectionHeader title={az ? "Müştərilər nə deyir" : "What clients say"} />
 
       <div
-        className="relative mx-auto max-w-2xl rounded-3xl glass px-14 py-10 shadow-premium sm:px-20 sm:py-12"
+        className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl glass px-14 py-10 shadow-premium sm:px-20 sm:py-12"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
+        {/* oversized decorative quote mark */}
+        <Quote
+          size={140}
+          aria-hidden
+          className="pointer-events-none absolute -right-4 -top-6 text-primary/[0.07]"
+          style={{ transform: "scaleX(-1)" }}
+        />
         {/* side arrows */}
         <button
           onClick={prev}
@@ -70,17 +78,33 @@ export function Testimonials() {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="flex flex-col items-center text-center"
           >
-            {/* avatar with quote badge */}
+            {/* avatar: real client logo, or initial as fallback */}
             <div className="relative">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-brand-gradient font-display text-2xl font-bold text-background shadow-glow">
-                {item.name.charAt(0)}
-              </div>
-              <span className="absolute -left-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-                {"“"}
-              </span>
+              {item.logo ? (
+                <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-white p-2 shadow-glow ring-2 ring-primary/30">
+                  <Image
+                    src={item.logo}
+                    alt={item.name}
+                    width={72}
+                    height={72}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-brand-gradient font-display text-2xl font-bold text-background shadow-glow">
+                  {item.name.charAt(0)}
+                </div>
+              )}
             </div>
 
-            <figcaption className="mt-4">
+            {/* five-star rating */}
+            <div className="mt-4 flex gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={16} className="fill-primary text-primary" />
+              ))}
+            </div>
+
+            <figcaption className="mt-3">
               <h3 className="font-display text-xl font-bold text-ink sm:text-2xl">{item.name}</h3>
               <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
                 {item.role[lang]}
