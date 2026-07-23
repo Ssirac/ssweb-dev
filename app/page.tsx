@@ -5,7 +5,6 @@ import { Skills } from "@/components/sections/skills";
 import { Services } from "@/components/sections/services";
 import { Projects } from "@/components/sections/projects";
 import { GithubStats } from "@/components/sections/github";
-import { StackBuilderSection } from "@/components/sections/stack-builder";
 import { RunnerGame } from "@/components/sections/runner-game";
 import { Terminal } from "@/components/sections/terminal";
 import { Contact } from "@/components/sections/contact";
@@ -20,7 +19,6 @@ export default function Home() {
       <Services />
       <Projects />
       <GithubStats />
-      <StackBuilderSection />
       <RunnerGame />
       <Terminal />
       <Contact />

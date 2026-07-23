@@ -24,7 +24,7 @@ export function ParticleWords() {
   if (!enabled) return null;
 
   return (
-    <div aria-hidden className="relative mx-auto mt-16 max-w-3xl">
+    <div aria-hidden className="relative mx-auto mt-12 max-w-xl">
       <ParticleTextEffect words={WORDS} className="mx-auto w-full" />
     </div>
   );

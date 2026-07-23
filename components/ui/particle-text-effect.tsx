@@ -127,8 +127,9 @@ export function ParticleTextEffect({ words, className }: ParticleTextEffectProps
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    canvas.width = 1000;
-    canvas.height = 500;
+    // Compact strip: less canvas area = fewer stray trails around the word.
+    canvas.width = 900;
+    canvas.height = 260;
     const ctx = canvas.getContext("2d")!;
 
     const displayFont =
@@ -142,7 +143,7 @@ export function ParticleTextEffect({ words, className }: ParticleTextEffectProps
       const offCtx = off.getContext("2d")!;
 
       offCtx.fillStyle = "white";
-      offCtx.font = `bold 110px ${displayFont}`;
+      offCtx.font = `bold 90px ${displayFont}`;
       offCtx.textAlign = "center";
       offCtx.textBaseline = "middle";
       offCtx.fillText(word, canvas.width / 2, canvas.height / 2);
@@ -206,9 +207,10 @@ export function ParticleTextEffect({ words, className }: ParticleTextEffectProps
       const particles = particlesRef.current;
 
       // Fade existing pixels toward transparent (motion-blur trails without
-      // painting a solid background box).
+      // painting a solid background box). 0.25 clears trails fast so the
+      // area around the word never reads as a hazy backdrop.
       ctx.globalCompositeOperation = "destination-out";
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.globalCompositeOperation = "source-over";
 

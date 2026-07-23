@@ -10,6 +10,7 @@ import { useLang } from "@/lib/i18n";
 import { SkillsSphere } from "../skills-sphere";
 import { SkillRadar } from "../ui/skill-radar";
 import { ParticleWords } from "./particle-words";
+import StackBuilder from "../ui/interactive-tech-stack-builder";
 
 const MARQUEE = [
   "React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS",
@@ -25,7 +26,8 @@ const ICONS: Record<string, IconType> = {
 const SKILL_ITEMS = Object.entries(ICONS).map(([name, Icon]) => ({ name, Icon }));
 
 export function Skills() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const az = lang === "az";
   return (
     <section id="skills" className="section-anchor relative mx-auto max-w-6xl px-6 py-28">
       <SectionHeader title={t.skills.title} subtitle={t.skills.subtitle} />
@@ -39,6 +41,19 @@ export function Skills() {
       </div>
 
       <SkillRadar />
+
+      {/* interactive LEGO stack builder */}
+      <div className="mt-20">
+        <h3 className="text-center font-display text-2xl font-bold text-ink md:text-3xl">
+          {az ? "Stekimi özün yığ" : "Build my stack"}
+        </h3>
+        <p className="mx-auto mt-2 max-w-md text-center text-sm text-muted">
+          {az
+            ? "Bloklara klik et: texnologiyalar profilin üstünə düzülsün."
+            : "Click the blocks: the technologies stack up on the profile."}
+        </p>
+        <StackBuilder />
+      </div>
 
       {/* the tool names, cycled as particles */}
       <ParticleWords />
