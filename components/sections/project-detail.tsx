@@ -12,6 +12,7 @@ export function ProjectDetail({ project: p }: { project: Project }) {
   const { t, lang } = useLang();
   // Optional per-project outcome facts (see the `results` comment in lib/data.ts).
   const results = (p as { results?: { az: string[]; en: string[] } }).results;
+  const market = (p as { market?: { az: string; en: string } }).market;
 
   return (
     <section className="section-anchor relative mx-auto max-w-4xl px-6 py-28">
@@ -25,6 +26,11 @@ export function ProjectDetail({ project: p }: { project: Project }) {
           <span>{t.projects.categories[p.category]}</span>
           <span className="text-muted">·</span>
           <span className="text-muted">{p.year}</span>
+          {market && (
+            <span className="rounded-full border border-ink/10 bg-ink/5 px-2.5 py-1 text-[11px] text-ink/80">
+              🇩🇪 {market[lang]}
+            </span>
+          )}
         </div>
         <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-ink md:text-5xl">{p.title}</h1>
         <p className="mt-4 max-w-2xl text-muted">{p.desc[lang]}</p>

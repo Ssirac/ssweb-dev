@@ -96,6 +96,7 @@ export const PROJECTS = [
     demo: "",
     repo: "",
     role: { az: "Full-stack Developer", en: "Full-stack Developer" },
+    market: { az: "Almaniya bazarı üçün", en: "Built for the German market" },
     desc: {
       az: "Azərbaycanlı hospitality/ticarət namizədlərini Alman işəgötürənlərlə birləşdirən, viza-sponsorluğuna meyilli şirkətləri önə çıxaran AI-əsaslı işə-qəbul avtomatlaşdırma platforması.",
       en: "AI-powered recruitment automation platform connecting Azerbaijani hospitality/trade candidates with German employers, surfacing visa-sponsorship-friendly companies.",
@@ -139,6 +140,7 @@ export const PROJECTS = [
     demo: "https://mz-personalvermittlung.de/",
     repo: "",
     role: { az: "Frontend Developer", en: "Frontend Developer" },
+    market: { az: "Almaniya bazarı üçün", en: "Built for the German market" },
     desc: {
       az: "Almaniyaya beynəlxalq ixtisaslı işçi və təcrübəçi qəbulu üçün çoxdilli landing sayt: xidmət kartları, addım-addım proses və əlaqə forması.",
       en: "Multilingual landing site for placing international skilled workers and apprentices in Germany: service cards, a step-by-step process and a contact form.",
