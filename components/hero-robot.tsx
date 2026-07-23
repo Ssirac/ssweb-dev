@@ -6,12 +6,13 @@
 //
 // Perf notes:
 // - the ~3MB scene file is preloaded in parallel with the Spline JS chunk;
-// - the canvas is FULLY UNMOUNTED once the hero scrolls out of view (small
-//   120px buffer): stop()/play() still left the WebGL layer compositing and
-//   the page stuttered below the hero. Unmounting frees the GPU completely;
-//   on scroll-back the scene re-inits from HTTP cache behind the warm-up fade;
-// - reveal is delayed 400ms after load so shader compilation and the first
-//   heavy frames happen while invisible (hides the post-load stutter);
+// - the scene is initialized ONCE and kept alive: leaving the hero stops the
+//   runtime and sets the canvas display:none (drops out of compositing with
+//   zero per-frame cost), returning shows it again instantly. The previous
+//   unmount/remount approach recompiled shaders on every scroll-back, which
+//   caused a visible arrival stutter each time;
+// - the first reveal is delayed 700ms after load so shader compilation and
+//   the first heavy frames happen while invisible;
 // - no scroll parallax: per-frame transforms of a large WebGL layer jank.
 
 import { useEffect, useRef, useState } from "react";
@@ -26,7 +27,7 @@ const EDGE_MASK = "radial-gradient(78% 72% at 50% 50%, #000 52%, transparent 97%
 
 export function HeroRobot() {
   const [enabled, setEnabled] = useState(false);
-  const [inView, setInView] = useState(true);
+  const [hidden, setHidden] = useState(false);
   const [ready, setReady] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
@@ -59,56 +60,62 @@ export function HeroRobot() {
     setEnabled(on);
   }, []);
 
-  // Mount the scene only while the hero is (near) the viewport.
+  // Pause + hide (not unmount) while the hero is out of view. The outer box
+  // keeps its layout so the IntersectionObserver can fire again on return.
   useEffect(() => {
     const el = boxRef.current;
     if (!el || !enabled) return;
-    // Tight 120px buffer: with 400px the scene kept rendering through the
-    // whole top of the About section and it stuttered there.
-    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
-      rootMargin: "120px 0px 120px 0px",
-    });
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const app = appRef.current;
+        if (entry.isIntersecting) {
+          setHidden(false);
+          try {
+            app?.play();
+          } catch {}
+        } else {
+          setHidden(true);
+          try {
+            app?.stop();
+          } catch {}
+        }
+      },
+      { rootMargin: "120px 0px 120px 0px" },
+    );
     io.observe(el);
     return () => io.disconnect();
   }, [enabled]);
-
-  // Reset the reveal state whenever the scene is unmounted.
-  useEffect(() => {
-    if (!inView) {
-      setReady(false);
-      appRef.current = null;
-      if (revealTimer.current) clearTimeout(revealTimer.current);
-    }
-  }, [inView]);
 
   if (!enabled) return null;
 
   return (
     <div ref={boxRef} className="relative h-[340px] w-full sm:h-[420px] lg:h-[500px] xl:h-[560px]">
-      {inView && (
-        <div
-          className={`h-full w-full transition-opacity duration-[900ms] ease-out ${
-            ready ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ WebkitMaskImage: EDGE_MASK, maskImage: EDGE_MASK }}
-        >
-          <SplineScene
-            scene={SCENE}
-            className="h-full w-full"
-            onLoad={(app) => {
-              appRef.current = app;
-              // Clear the scene's baked background if the runtime supports it,
-              // so the page backdrop shows through behind the robot.
-              try {
-                const a = app as unknown as { setBackgroundColor?: (c: string) => void };
-                a.setBackgroundColor?.("rgba(0,0,0,0)");
-              } catch {}
-              // Warm-up: stay invisible while shaders compile, then fade in.
-              revealTimer.current = window.setTimeout(() => setReady(true), 400);
-            }}
-          />
-        </div>
-      )}
+      <div
+        className={`h-full w-full transition-opacity duration-[900ms] ease-out ${
+          ready ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          WebkitMaskImage: EDGE_MASK,
+          maskImage: EDGE_MASK,
+          display: hidden ? "none" : undefined,
+        }}
+      >
+        <SplineScene
+          scene={SCENE}
+          className="h-full w-full"
+          onLoad={(app) => {
+            appRef.current = app;
+            // Clear the scene's baked background if the runtime supports it,
+            // so the page backdrop shows through behind the robot.
+            try {
+              const a = app as unknown as { setBackgroundColor?: (c: string) => void };
+              a.setBackgroundColor?.("rgba(0,0,0,0)");
+            } catch {}
+            // Warm-up: stay invisible while shaders compile, then fade in.
+            revealTimer.current = window.setTimeout(() => setReady(true), 700);
+          }}
+        />
+      </div>
     </div>
   );
 }
