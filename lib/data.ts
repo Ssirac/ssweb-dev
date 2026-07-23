@@ -37,7 +37,7 @@ export const TESTIMONIALS: Testimonial[] = [
   //     az: "Kataloq saytımızı qısa müddətdə çox səliqəli hazırladı. Sifarişlər indi birbaşa WhatsApp-ımıza gəlir, həm bizim, həm müştərilərimiz üçün çox rahatdır.",
   //     en: "He built our catalog site quickly and cleanly. Orders now come straight to our WhatsApp, which is convenient for us and our customers.",
   //   },
-  //   name: "AD SOYAD", // <- müştərinin real adı
+  //   name: "Süleyman Ağazadə",
   //   role: { az: "Original Brands Baku, təsisçi", en: "Original Brands Baku, founder" },
   // },
   // {
@@ -45,8 +45,8 @@ export const TESTIMONIALS: Testimonial[] = [
   //     az: "Əvvəllər CV-lərin emalı və müraciətlərin göndərilməsi günlərlə vaxt alırdı. İndi sistem bunu avtomatik edir, biz yalnız təsdiqləyirik. Ciddi texniki iş görülüb.",
   //     en: "Processing CVs and sending applications used to take days. Now the system does it automatically and we only approve. Serious technical work.",
   //   },
-  //   name: "AD SOYAD", // <- müştərinin real adı
-  //   role: { az: "MZ Personalvermittlung, rəhbər", en: "MZ Personalvermittlung, director" },
+  //   name: "MZ Personalvermittlung",
+  //   role: { az: "Rekrutinq agentliyi, Almaniya", en: "Recruitment agency, Germany" },
   // },
 ];
 
