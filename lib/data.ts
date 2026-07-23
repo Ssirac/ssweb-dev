@@ -16,7 +16,7 @@ export const PROFILE = {
     github: "https://github.com/ssweb-dev",
     linkedin: "https://www.linkedin.com/in/sirac-cavadov-530b89334",
     instagram: "https://www.instagram.com/ssweb.dev/",
-    tiktok: "", // TikTok profil linkini bura yaz — boş qaldıqca düymə görünmür
+    tiktok: "https://www.tiktok.com/@ssweb.dev",
     discord: "https://discord.com/users/ssdeveloper",
   },
 };

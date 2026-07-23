@@ -6,6 +6,7 @@
 
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
 import { SectionHeader } from "../ui/section-header";
 import { Magnetic } from "../ui/magnetic";
 import { AvailabilityBadge } from "../ui/availability-badge";
@@ -15,6 +16,7 @@ import { useLang } from "@/lib/i18n";
 const SOCIALS = [
   { icon: FaWhatsapp, href: `https://wa.me/${PROFILE.whatsapp[0].number}`, label: "WhatsApp" },
   { icon: FaInstagram, href: PROFILE.socials.instagram, label: "Instagram" },
+  { icon: FaTiktok, href: PROFILE.socials.tiktok, label: "TikTok" },
   { icon: FaGithub, href: PROFILE.socials.github, label: "GitHub" },
   { icon: FaLinkedin, href: PROFILE.socials.linkedin, label: "LinkedIn" },
 ];
