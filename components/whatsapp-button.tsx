@@ -17,7 +17,6 @@ type DockItem = {
   href: string;
   label: string;
   external: boolean;
-  accent?: string;
 };
 
 export function WhatsAppButton() {
@@ -31,7 +30,6 @@ export function WhatsAppButton() {
       href: `https://wa.me/${PROFILE.whatsapp[0].number}`,
       label: az ? "WhatsApp-da yaz" : "WhatsApp",
       external: true,
-      accent: "#25D366",
     },
     { icon: FaInstagram, href: PROFILE.socials.instagram, label: "Instagram", external: true },
     ...(PROFILE.socials.tiktok
@@ -69,7 +67,6 @@ export function WhatsAppButton() {
                 whileTap={{ scale: 0.94 }}
                 onClick={() => setOpen(false)}
                 className="group relative flex h-12 w-12 items-center justify-center rounded-full glass-strong text-ink shadow-premium transition-colors hover:text-primary"
-                style={item.accent ? { background: item.accent, color: "#fff" } : undefined}
               >
                 <item.icon size={19} />
                 <span className="pointer-events-none absolute right-16 whitespace-nowrap rounded-lg glass-strong px-3 py-1.5 text-sm text-ink opacity-0 shadow-premium transition-opacity duration-200 group-hover:opacity-100">
