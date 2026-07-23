@@ -24,6 +24,11 @@ import {
   SiTailwindcss,
   SiFramer,
   SiThreedotjs,
+  SiJavascript,
+  SiHtml5,
+  SiNodedotjs,
+  SiGit,
+  SiFigma,
 } from "react-icons/si";
 import { fireConfetti } from "@/lib/confetti";
 import { useLang } from "@/lib/i18n";
@@ -65,6 +70,12 @@ const STUD_THEMES = {
     wall: "linear-gradient(90deg, #2b34b8 0%, #3743d6 20%, #4550f5 38%, #5a64ff 50%, #4550f5 62%, #3743d6 80%, #2b34b8 100%)",
     cap: "linear-gradient(135deg, #aab1ff 0%, #7c85ff 40%, #4550f5 70%, #3743d6 100%)",
     shadow: "radial-gradient(ellipse, rgba(10,10,60,0.6) 0%, transparent 70%)",
+    rim: "rgba(255,255,255,0.7)",
+  },
+  yellow: {
+    wall: "linear-gradient(90deg, #a16207 0%, #ca8a04 20%, #eab308 38%, #facc15 50%, #eab308 62%, #ca8a04 80%, #a16207 100%)",
+    cap: "linear-gradient(135deg, #fef08a 0%, #fde047 40%, #eab308 70%, #ca8a04 100%)",
+    shadow: "radial-gradient(ellipse, rgba(80,50,0,0.6) 0%, transparent 70%)",
     rim: "rgba(255,255,255,0.7)",
   },
 };
@@ -206,7 +217,7 @@ const LegoBlock = ({
   );
 };
 
-// Our actual stack. Stud counts sum to 18 = three full 6-stud rows.
+// Our actual toolbelt. Stud counts sum to 30 = five full 6-stud rows.
 const MODULES = [
   {
     id: "react",
@@ -265,6 +276,34 @@ const MODULES = [
     },
   },
   {
+    id: "javascript",
+    name: "JavaScript",
+    icon: SiJavascript,
+    studs: 4,
+    colors: {
+      topColor: "#fde047",
+      faceGradient: "linear-gradient(180deg, #facc15 0%, #eab308 50%, #ca8a04 100%)",
+      bottomColor: "#854d0e",
+      studColor: "yellow" as StudColor,
+      iconBg: "bg-black/25 shadow-inner",
+      iconColor: "text-white drop-shadow-sm",
+    },
+  },
+  {
+    id: "html",
+    name: "HTML/CSS",
+    icon: SiHtml5,
+    studs: 2,
+    colors: {
+      topColor: "#fb923c",
+      faceGradient: "linear-gradient(180deg, #f97316 0%, #ea580c 50%, #c2410c 100%)",
+      bottomColor: "#9a3412",
+      studColor: "red" as StudColor,
+      iconBg: "bg-black/20 shadow-inner",
+      iconColor: "text-white drop-shadow-sm",
+    },
+  },
+  {
     id: "framer",
     name: "Framer",
     icon: SiFramer,
@@ -289,6 +328,48 @@ const MODULES = [
       bottomColor: "#1f2937",
       studColor: "dark" as StudColor,
       iconBg: "bg-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]",
+      iconColor: "text-white drop-shadow-sm",
+    },
+  },
+  {
+    id: "node",
+    name: "Node.js",
+    icon: SiNodedotjs,
+    studs: 2,
+    colors: {
+      topColor: "#4ade80",
+      faceGradient: "linear-gradient(180deg, #22c55e 0%, #16a34a 50%, #15803d 100%)",
+      bottomColor: "#14532d",
+      studColor: "green" as StudColor,
+      iconBg: "bg-black/20 shadow-inner",
+      iconColor: "text-white drop-shadow-sm",
+    },
+  },
+  {
+    id: "git",
+    name: "Git",
+    icon: SiGit,
+    studs: 2,
+    colors: {
+      topColor: "#f87171",
+      faceGradient: "linear-gradient(180deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%)",
+      bottomColor: "#7f1d1d",
+      studColor: "red" as StudColor,
+      iconBg: "bg-black/20 shadow-inner",
+      iconColor: "text-white drop-shadow-sm",
+    },
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    icon: SiFigma,
+    studs: 2,
+    colors: {
+      topColor: "#c084fc",
+      faceGradient: "linear-gradient(180deg, #a855f7 0%, #9333ea 50%, #7e22ce 100%)",
+      bottomColor: "#581c87",
+      studColor: "indigo" as StudColor,
+      iconBg: "bg-black/20 shadow-inner",
       iconColor: "text-white drop-shadow-sm",
     },
   },
