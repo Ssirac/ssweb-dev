@@ -28,7 +28,27 @@ export type Testimonial = {
   name: string; // real ad
   role: { az: string; en: string }; // vəzifə + şirkət
 };
-export const TESTIMONIALS: Testimonial[] = [];
+export const TESTIMONIALS: Testimonial[] = [
+  // ⏳ TƏSDİQ GÖZLƏYİR — müştəri "təsdiq edirəm" deyən kimi şərhdən çıxar,
+  // ad/vəzifəni real məlumatla doldur. Bölmə avtomatik görünəcək.
+  //
+  // {
+  //   quote: {
+  //     az: "Kataloq saytımızı qısa müddətdə çox səliqəli hazırladı. Sifarişlər indi birbaşa WhatsApp-ımıza gəlir, həm bizim, həm müştərilərimiz üçün çox rahatdır.",
+  //     en: "He built our catalog site quickly and cleanly. Orders now come straight to our WhatsApp, which is convenient for us and our customers.",
+  //   },
+  //   name: "AD SOYAD", // <- müştərinin real adı
+  //   role: { az: "Original Brands Baku, təsisçi", en: "Original Brands Baku, founder" },
+  // },
+  // {
+  //   quote: {
+  //     az: "Əvvəllər CV-lərin emalı və müraciətlərin göndərilməsi günlərlə vaxt alırdı. İndi sistem bunu avtomatik edir, biz yalnız təsdiqləyirik. Ciddi texniki iş görülüb.",
+  //     en: "Processing CVs and sending applications used to take days. Now the system does it automatically and we only approve. Serious technical work.",
+  //   },
+  //   name: "AD SOYAD", // <- müştərinin real adı
+  //   role: { az: "MZ Personalvermittlung, rəhbər", en: "MZ Personalvermittlung, director" },
+  // },
+];
 
 // Multi-page navigation. Labels are resolved per-language from
 // lib/i18n.tsx via `id`; `href` is the route each item points to.
