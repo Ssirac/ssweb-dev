@@ -1,12 +1,14 @@
 "use client";
 
-// Stacked testimonial deck with explicit controls. The active card is always
-// fully on top and readable; the rest peek out behind it, dimmed. Arrows and
-// dots (plus clicking a peeking card) switch cards — no hover mechanics,
-// which made the lower card unreadable. Renders nothing until TESTIMONIALS
-// in lib/data.ts has real entries.
+// Centered testimonial carousel, rebuilt by eye from nayan_radadiya6's
+// 21st.dev component (its source is membership-locked): avatar with a quote
+// badge, name, accent role, quote, side arrows, dots and a gentle
+// auto-advance (paused on hover, off under reduced motion). Our adaptations:
+// initial-letter avatars instead of stock photos and the brand accent
+// everywhere. Renders nothing until TESTIMONIALS in lib/data.ts has entries.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeader } from "../ui/section-header";
 import { TESTIMONIALS } from "@/lib/data";
@@ -16,9 +18,20 @@ import { cn } from "@/lib/utils";
 export function Testimonials() {
   const { lang } = useLang();
   const [active, setActive] = useState(0);
-  if (TESTIMONIALS.length === 0) return null;
-  const az = lang === "az";
+  const [paused, setPaused] = useState(false);
   const count = TESTIMONIALS.length;
+
+  // Gentle auto-advance.
+  useEffect(() => {
+    if (paused || count < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setActive((a) => (a + 1) % count), 6000);
+    return () => clearInterval(id);
+  }, [paused, count]);
+
+  if (count === 0) return null;
+  const az = lang === "az";
+  const item = TESTIMONIALS[active];
 
   const prev = () => setActive((a) => (a - 1 + count) % count);
   const next = () => setActive((a) => (a + 1) % count);
@@ -27,55 +40,64 @@ export function Testimonials() {
     <section className="relative mx-auto max-w-5xl px-6 py-24">
       <SectionHeader title={az ? "Müştərilər nə deyir" : "What clients say"} />
 
-      <div className="grid place-items-center pt-4 [grid-template-areas:'stack']">
-        {TESTIMONIALS.map((item, i) => {
-          const isActive = i === active;
-          return (
-            <div
-              key={item.name}
-              onClick={() => setActive(i)}
-              className={cn(
-                "flex w-[300px] cursor-pointer select-none flex-col rounded-2xl glass p-5 shadow-premium transition-all duration-500 sm:w-[440px] sm:p-6 [grid-area:stack]",
-                isActive
-                  ? "z-20 rotate-0 border-primary/30 opacity-100 shadow-glow"
-                  : "z-10 -rotate-2 translate-x-6 translate-y-6 scale-[0.97] opacity-70 grayscale sm:translate-x-10 sm:translate-y-8",
-              )}
-            >
-              {/* header */}
-              <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-gradient font-display text-lg font-bold text-background">
-                  {item.name.charAt(0)}
-                </div>
-                <div className="min-w-0">
-                  <p className="truncate font-semibold text-ink">{item.name}</p>
-                  <p className="truncate text-xs text-muted">{item.role[lang]}</p>
-                </div>
-              </div>
-
-              {/* quote */}
-              <p className="text-sm leading-relaxed text-ink/85">
-                {"“"}
-                {item.quote[lang]}
-                {"”"}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* controls */}
-      <div className="mt-10 flex items-center justify-center gap-4">
+      <div
+        className="relative mx-auto max-w-2xl rounded-3xl glass px-14 py-10 shadow-premium sm:px-20 sm:py-12"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* side arrows */}
         <button
           onClick={prev}
           aria-label={az ? "Əvvəlki rəy" : "Previous review"}
-          className="flex h-10 w-10 items-center justify-center rounded-full glass text-ink transition hover:border-primary/40 hover:text-primary hover:shadow-glow"
+          className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full glass text-ink transition hover:border-primary/40 hover:text-primary hover:shadow-glow sm:left-5"
         >
           <ChevronLeft size={18} />
         </button>
-        <div className="flex gap-2">
-          {TESTIMONIALS.map((item, i) => (
+        <button
+          onClick={next}
+          aria-label={az ? "Növbəti rəy" : "Next review"}
+          className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full glass text-ink transition hover:border-primary/40 hover:text-primary hover:shadow-glow sm:right-5"
+        >
+          <ChevronRight size={18} />
+        </button>
+
+        <AnimatePresence mode="wait">
+          <motion.figure
+            key={active}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -14 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="flex flex-col items-center text-center"
+          >
+            {/* avatar with quote badge */}
+            <div className="relative">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-brand-gradient font-display text-2xl font-bold text-background shadow-glow">
+                {item.name.charAt(0)}
+              </div>
+              <span className="absolute -left-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                {"“"}
+              </span>
+            </div>
+
+            <figcaption className="mt-4">
+              <h3 className="font-display text-xl font-bold text-ink sm:text-2xl">{item.name}</h3>
+              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+                {item.role[lang]}
+              </p>
+            </figcaption>
+
+            <blockquote className="mt-4 max-w-xl text-sm leading-relaxed text-ink/85 sm:text-base">
+              {item.quote[lang]}
+            </blockquote>
+          </motion.figure>
+        </AnimatePresence>
+
+        {/* dots */}
+        <div className="mt-8 flex justify-center gap-2">
+          {TESTIMONIALS.map((entry, i) => (
             <button
-              key={item.name}
+              key={entry.name}
               onClick={() => setActive(i)}
               aria-label={`${i + 1}`}
               className={cn(
@@ -85,13 +107,6 @@ export function Testimonials() {
             />
           ))}
         </div>
-        <button
-          onClick={next}
-          aria-label={az ? "Növbəti rəy" : "Next review"}
-          className="flex h-10 w-10 items-center justify-center rounded-full glass text-ink transition hover:border-primary/40 hover:text-primary hover:shadow-glow"
-        >
-          <ChevronRight size={18} />
-        </button>
       </div>
     </section>
   );
