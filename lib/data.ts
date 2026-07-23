@@ -28,26 +28,24 @@ export type Testimonial = {
   name: string; // real ad
   role: { az: string; en: string }; // vəzifə + şirkət
 };
+// Müştərilər tərəfindən təsdiqlənib (23 iyul 2026).
 export const TESTIMONIALS: Testimonial[] = [
-  // ⏳ TƏSDİQ GÖZLƏYİR — müştəri "təsdiq edirəm" deyən kimi şərhdən çıxar,
-  // ad/vəzifəni real məlumatla doldur. Bölmə avtomatik görünəcək.
-  //
-  // {
-  //   quote: {
-  //     az: "Kataloq saytımızı qısa müddətdə çox səliqəli hazırladı. Sifarişlər indi birbaşa WhatsApp-ımıza gəlir, həm bizim, həm müştərilərimiz üçün çox rahatdır.",
-  //     en: "He built our catalog site quickly and cleanly. Orders now come straight to our WhatsApp, which is convenient for us and our customers.",
-  //   },
-  //   name: "Süleyman Ağazadə",
-  //   role: { az: "Original Brands Baku, təsisçi", en: "Original Brands Baku, founder" },
-  // },
-  // {
-  //   quote: {
-  //     az: "Əvvəllər CV-lərin emalı və müraciətlərin göndərilməsi günlərlə vaxt alırdı. İndi sistem bunu avtomatik edir, biz yalnız təsdiqləyirik. Ciddi texniki iş görülüb.",
-  //     en: "Processing CVs and sending applications used to take days. Now the system does it automatically and we only approve. Serious technical work.",
-  //   },
-  //   name: "MZ Personalvermittlung",
-  //   role: { az: "Rekrutinq agentliyi, Almaniya", en: "Recruitment agency, Germany" },
-  // },
+  {
+    quote: {
+      az: "Kataloq saytımızı qısa müddətdə çox səliqəli hazırladı. Sifarişlər indi birbaşa WhatsApp-ımıza gəlir, həm bizim, həm müştərilərimiz üçün çox rahatdır.",
+      en: "He built our catalog site quickly and cleanly. Orders now come straight to our WhatsApp, which is convenient for us and our customers.",
+    },
+    name: "Süleyman Ağazadə",
+    role: { az: "Original Brands Baku, təsisçi", en: "Original Brands Baku, founder" },
+  },
+  {
+    quote: {
+      az: "Əvvəllər CV-lərin emalı və müraciətlərin göndərilməsi günlərlə vaxt alırdı. İndi sistem bunu avtomatik edir, biz yalnız təsdiqləyirik. Ciddi texniki iş görülüb.",
+      en: "Processing CVs and sending applications used to take days. Now the system does it automatically and we only approve. Serious technical work.",
+    },
+    name: "MZ Personalvermittlung",
+    role: { az: "Rekrutinq agentliyi, Almaniya", en: "Recruitment agency, Germany" },
+  },
 ];
 
 // Multi-page navigation. Labels are resolved per-language from
