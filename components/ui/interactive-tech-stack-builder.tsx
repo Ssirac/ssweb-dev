@@ -32,6 +32,7 @@ import {
 } from "react-icons/si";
 import { fireConfetti } from "@/lib/confetti";
 import { useLang } from "@/lib/i18n";
+import { LiquidGlow } from "@/components/ui/liquid-glow";
 
 const GRID_CONSTANTS = {
   STUD_WIDTH: 65,
@@ -690,10 +691,11 @@ export default function StackBuilder({ className = "" }: { className?: string })
                   exit={{ opacity: 0, y: -20, scale: 0.9 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="rounded-full bg-brand-gradient px-8 py-3.5 font-medium tracking-wide text-background shadow-glow transition hover:shadow-glow-lg"
+                  className="group relative overflow-hidden rounded-full px-8 py-3.5 font-medium tracking-wide text-white shadow-glow transition hover:shadow-glow-lg"
                   onClick={() => fireConfetti()}
                 >
-                  {az ? "Stek tamamlandı!" : "Stack complete!"} 🎉
+                  <LiquidGlow />
+                  <span className="relative z-10">{az ? "Stek tamamlandı!" : "Stack complete!"} 🎉</span>
                 </motion.button>
               )}
             </AnimatePresence>

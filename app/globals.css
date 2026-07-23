@@ -137,6 +137,10 @@ body {
 /* CSS logo coin (transform-only, compositor) */
 @keyframes coin-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
 
+/* liquid button gradient (transform-only spin, compositor) */
+.liquid-spin { animation: liquid-spin 6s linear infinite; }
+@keyframes liquid-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
 /* typewriter reveal for the hero code layer — clip-path only (paint, no layout) */
 @keyframes code-type {
   0%    { clip-path: inset(0 100% 0 0); opacity: 1; animation-timing-function: steps(30, end); }

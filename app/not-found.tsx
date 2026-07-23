@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Home, ArrowLeft } from "lucide-react";
+import { LiquidGlow } from "@/components/ui/liquid-glow";
 
 export default function NotFound() {
   return (
@@ -34,16 +35,22 @@ export default function NotFound() {
           <Link
             href="/"
             data-cursor
-            className="group flex items-center gap-2 rounded-full bg-brand-gradient px-6 py-3 font-medium text-background shadow-glow transition hover:shadow-glow-lg"
+            className="group relative flex items-center overflow-hidden rounded-full px-6 py-3 font-medium text-white shadow-glow transition hover:shadow-glow-lg"
           >
-            <Home size={17} /> Ana səhifə
+            <LiquidGlow />
+            <span className="relative z-10 flex items-center gap-2">
+              <Home size={17} /> Ana səhifə
+            </span>
           </Link>
           <Link
             href="/projects"
             data-cursor
-            className="flex items-center gap-2 rounded-full border border-ink/12 px-6 py-3 font-medium text-ink transition hover:border-primary/50 hover:text-primary"
+            className="group relative flex items-center overflow-hidden rounded-full px-6 py-3 font-medium text-white transition"
           >
-            <ArrowLeft size={17} /> Layihələr
+            <LiquidGlow dim />
+            <span className="relative z-10 flex items-center gap-2">
+              <ArrowLeft size={17} /> Layihələr
+            </span>
           </Link>
         </div>
       </motion.div>

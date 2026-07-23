@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, Check } from "lucide-react";
 import { PROJECTS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
+import { LiquidGlow } from "../ui/liquid-glow";
 
 type Project = (typeof PROJECTS)[number];
 
@@ -37,8 +38,11 @@ export function ProjectDetail({ project: p }: { project: Project }) {
 
         {p.demo && (
           <a href={p.demo} target="_blank" rel="noopener noreferrer" data-cursor
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-gradient px-6 py-3 text-sm font-medium text-background shadow-glow transition hover:shadow-glow-lg">
-            <ExternalLink size={16} /> {t.cta.liveDemo}
+            className="group relative mt-6 inline-flex items-center overflow-hidden rounded-full px-6 py-3 text-sm font-medium text-white shadow-glow transition hover:shadow-glow-lg">
+            <LiquidGlow />
+            <span className="relative z-10 flex items-center gap-2">
+              <ExternalLink size={16} /> {t.cta.liveDemo}
+            </span>
           </a>
         )}
 

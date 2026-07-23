@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { LogoCoin } from "../ui/logo-coin";
+import { LiquidGlow } from "../ui/liquid-glow";
 import { Magnetic } from "../ui/magnetic";
 import { AvailabilityBadge } from "../ui/availability-badge";
 import { useLang } from "@/lib/i18n";
@@ -138,17 +139,23 @@ export function Hero() {
             <Magnetic>
               <Link
                 href="/projects"
-                className="group flex items-center gap-2 rounded-full bg-brand-gradient px-6 py-3 font-medium text-background shadow-glow transition hover:shadow-glow-lg"
+                className="group relative flex items-center overflow-hidden rounded-full px-6 py-3 font-medium text-white shadow-glow transition hover:shadow-glow-lg"
               >
-                {t.cta.viewProjects} <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
+                <LiquidGlow />
+                <span className="relative z-10 flex items-center gap-2">
+                  {t.cta.viewProjects} <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
+                </span>
               </Link>
             </Magnetic>
             <Magnetic>
               <Link
                 href="/contact"
-                className="flex items-center gap-2 rounded-full border border-ink/12 px-6 py-3 font-medium text-ink transition hover:border-primary/50 hover:text-primary"
+                className="group relative flex items-center overflow-hidden rounded-full px-6 py-3 font-medium text-white transition"
               >
-                <Mail size={17} /> {t.cta.contactMe}
+                <LiquidGlow dim />
+                <span className="relative z-10 flex items-center gap-2">
+                  <Mail size={17} /> {t.cta.contactMe}
+                </span>
               </Link>
             </Magnetic>
           </motion.div>

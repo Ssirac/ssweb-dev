@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Menu, X, Command as CmdIcon } from "lucide-react";
 import { LogoWordmark } from "./logo";
 import { Magnetic } from "./ui/magnetic";
+import { LiquidGlow } from "./ui/liquid-glow";
 import { NAV_LINKS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 import { ThemeToggle } from "./theme-toggle";
@@ -74,10 +75,11 @@ export function Navbar() {
         <Magnetic className="hidden md:block">
           <Link
             href="/contact"
-            className="block rounded-full bg-brand-gradient px-4 py-2 text-sm font-medium text-background shadow-glow transition hover:shadow-glow-lg"
+            className="group relative block overflow-hidden rounded-full px-4 py-2 text-sm font-medium text-white shadow-glow transition hover:shadow-glow-lg"
             data-cursor
           >
-            {t.cta.letsTalk}
+            <LiquidGlow />
+            <span className="relative z-10">{t.cta.letsTalk}</span>
           </Link>
         </Magnetic>
         <button className="md:hidden text-ink" onClick={() => setOpen(!open)} aria-label="Menu">
