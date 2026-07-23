@@ -19,7 +19,9 @@ import { preload } from "react-dom";
 import type { Application } from "@splinetool/runtime";
 import { SplineScene } from "@/components/ui/splite";
 
-const SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
+// Our own remix of the NEXBOT community scene: SS logo emblem on the chest,
+// NEXBOT wall text hidden, background baked to the site's dark tone (07080F).
+const SCENE = "https://prod.spline.design/e474W1xFIThd5kSX/scene.splinecode";
 
 // Fade the canvas edges into the page so no rectangle is visible.
 const EDGE_MASK = "radial-gradient(78% 72% at 50% 50%, #000 52%, transparent 97%)";
