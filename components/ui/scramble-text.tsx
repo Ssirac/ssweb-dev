@@ -1,40 +1,42 @@
 "use client";
 
 // Scrambles into its text once, the first time it scrolls into view: each
-// character resolves left-to-right out of random glyphs. No-op for reduced
-// motion (renders the plain text).
+// character resolves left-to-right out of random glyphs. Writes straight to
+// the DOM (textContent) so the animation never re-renders the motion-wrapped
+// heading around it. No-op for reduced motion.
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const GLYPHS = "!<>-_\\/[]{}=+*^?#01";
 
 export function ScrambleText({ text, className }: { text: string; className?: string }) {
-  const [out, setOut] = useState(text);
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    el.textContent = text;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let interval: ReturnType<typeof setInterval> | null = null;
     const run = () => {
-      const total = 20;
+      const total = 16;
       let frame = 0;
       interval = setInterval(() => {
         frame++;
+        if (frame >= total) {
+          el.textContent = text;
+          if (interval) clearInterval(interval);
+          return;
+        }
         const revealed = Math.floor((frame / total) * text.length);
         let s = "";
         for (let i = 0; i < text.length; i++) {
           if (i < revealed || text[i] === " ") s += text[i];
           else s += GLYPHS[(Math.random() * GLYPHS.length) | 0];
         }
-        setOut(s);
-        if (frame >= total) {
-          if (interval) clearInterval(interval);
-          setOut(text);
-        }
-      }, 32);
+        el.textContent = s;
+      }, 40);
     };
 
     const io = new IntersectionObserver(
@@ -53,5 +55,9 @@ export function ScrambleText({ text, className }: { text: string; className?: st
     };
   }, [text]);
 
-  return <span ref={ref} className={className}>{out}</span>;
+  return (
+    <span ref={ref} className={className}>
+      {text}
+    </span>
+  );
 }

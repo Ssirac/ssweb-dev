@@ -6,8 +6,10 @@
 
 import { useEffect, useState } from "react";
 import { ParticleTextEffect } from "@/components/ui/particle-text-effect";
+import { SKILLS } from "@/lib/data";
 
-const WORDS = ["SS DEV", "REACT", "NEXT.JS", "TYPESCRIPT", "TAILWIND", "FRONTEND"];
+// SS DEV first, then every tool from the skills list (stays in sync with it).
+const WORDS = ["SS DEV", ...SKILLS.map((s) => s.name.toUpperCase())];
 
 export function ParticleWords() {
   const [enabled, setEnabled] = useState(false);

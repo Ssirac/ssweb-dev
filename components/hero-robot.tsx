@@ -6,8 +6,8 @@
 //
 // Perf notes:
 // - the ~3MB scene file is preloaded in parallel with the Spline JS chunk;
-// - the canvas is FULLY UNMOUNTED once the hero scrolls out of view (plus a
-//   400px buffer): stop()/play() still left the WebGL layer compositing and
+// - the canvas is FULLY UNMOUNTED once the hero scrolls out of view (small
+//   120px buffer): stop()/play() still left the WebGL layer compositing and
 //   the page stuttered below the hero. Unmounting frees the GPU completely;
 //   on scroll-back the scene re-inits from HTTP cache behind the warm-up fade;
 // - reveal is delayed 400ms after load so shader compilation and the first
@@ -63,8 +63,10 @@ export function HeroRobot() {
   useEffect(() => {
     const el = boxRef.current;
     if (!el || !enabled) return;
+    // Tight 120px buffer: with 400px the scene kept rendering through the
+    // whole top of the About section and it stuttered there.
     const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
-      rootMargin: "400px 0px 400px 0px",
+      rootMargin: "120px 0px 120px 0px",
     });
     io.observe(el);
     return () => io.disconnect();
