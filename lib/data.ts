@@ -21,6 +21,15 @@ export const PROFILE = {
   },
 };
 
+// REAL müştəri rəyləri. Boş qaldıqca bölmə saytda GÖRÜNMÜR.
+// Uydurma rəy YAZMA — yalnız müştərinin öz sözləri, öz icazəsi ilə.
+export type Testimonial = {
+  quote: { az: string; en: string };
+  name: string; // real ad
+  role: { az: string; en: string }; // vəzifə + şirkət
+};
+export const TESTIMONIALS: Testimonial[] = [];
+
 // Multi-page navigation. Labels are resolved per-language from
 // lib/i18n.tsx via `id`; `href` is the route each item points to.
 export const NAV_LINKS = [
@@ -95,6 +104,12 @@ export const PROJECTS = [
       az: "Sistem açıq iş mənbələrindən canlı vakansiyaları toplayır, işəgötürənləri sponsorluq ehtimalına görə qiymətləndirir, namizəd CV-lərini Claude ilə avtomatik parse edib uyğun işlərlə tutuşdurur və insan-təsdiqli avtomatik müraciətlər (email + forma) göndərir. Hamısı GDPR/UWG uyğunluğu ilə, üç dildə (AZ/DE/EN).",
       en: "The system collects live vacancies from open job sources, scores employers by sponsorship likelihood, auto-parses candidate CVs with Claude, matches them to suitable jobs and sends human-approved automated applications (email + forms). All GDPR/UWG compliant, in three languages (AZ/DE/EN).",
     },
+    // REAL nəticə faktları gələndə bu sahəni aç — detal səhifəsində
+    // "Nəticələr" bloku avtomatik görünəcək:
+    // results: {
+    //   az: ["CV emalı əl işindən tam avtomatikaya keçdi", "..."],
+    //   en: ["CV processing went from manual to fully automated", "..."],
+    // },
     features: {
       az: [
         "Çoxmənbəli vakansiya toplama (API-lər + Firecrawl web-scraping)",

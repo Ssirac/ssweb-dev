@@ -8,7 +8,6 @@ import { SectionHeader } from "../ui/section-header";
 import { Marquee } from "../ui/marquee";
 import { useLang } from "@/lib/i18n";
 import { SkillsSphere } from "../skills-sphere";
-import { SkillRadar } from "../ui/skill-radar";
 import { ParticleWords } from "./particle-words";
 import StackBuilder from "../ui/interactive-tech-stack-builder";
 
@@ -39,8 +38,6 @@ export function Skills() {
       <div className="mb-14">
         <SkillsSphere items={SKILL_ITEMS} />
       </div>
-
-      <SkillRadar />
 
       {/* interactive LEGO stack builder */}
       <div className="mt-20">

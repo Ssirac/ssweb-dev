@@ -241,7 +241,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = (typeof localStorage !== "undefined" && localStorage.getItem("lang")) as Lang | null;
-    if (saved === "en" || saved === "az") setLangState(saved);
+    if (saved === "en" || saved === "az") {
+      setLangState(saved);
+      return;
+    }
+    // First visit: pick the language from the browser locale. Regional locales
+    // (az/tr/ru) get Azerbaijani, everyone else gets English.
+    const locales = (navigator.languages?.length ? navigator.languages : [navigator.language || "az"]).map(
+      (l) => l.toLowerCase(),
+    );
+    const regional = locales.some((l) => l.startsWith("az") || l.startsWith("tr") || l.startsWith("ru"));
+    setLangState(regional ? "az" : "en");
   }, []);
 
   const setLang = (l: Lang) => {

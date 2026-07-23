@@ -10,6 +10,8 @@ type Project = (typeof PROJECTS)[number];
 
 export function ProjectDetail({ project: p }: { project: Project }) {
   const { t, lang } = useLang();
+  // Optional per-project outcome facts (see the `results` comment in lib/data.ts).
+  const results = (p as { results?: { az: string[]; en: string[] } }).results;
 
   return (
     <section className="section-anchor relative mx-auto max-w-4xl px-6 py-28">
@@ -58,6 +60,21 @@ export function ProjectDetail({ project: p }: { project: Project }) {
                 </li>
               ))}
             </ul>
+
+            {results && (
+              <>
+                <h3 className="mt-8 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+                  {lang === "az" ? "Nəticələr" : "Results"}
+                </h3>
+                <ul className="mt-4 space-y-2">
+                  {results[lang].map((r) => (
+                    <li key={r} className="flex items-start gap-2 text-sm text-muted">
+                      <Check size={16} className="mt-0.5 shrink-0 text-primary" /> {r}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
 
           <div className="space-y-6">
