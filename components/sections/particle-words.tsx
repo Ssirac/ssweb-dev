@@ -1,8 +1,9 @@
 "use client";
 
-// Particle word-morph interlude (fills the slot the orb used to occupy).
-// Tech terms are language-neutral, so no i18n needed. Desktop only; the
-// effect itself also pauses its rAF loop whenever it scrolls off-screen.
+// Particle word-morph, embedded at the end of the Skills section ("the tools
+// I work with" cycled as particles). Tech terms are language-neutral, so no
+// i18n needed. Desktop only; the effect itself also pauses its rAF loop
+// whenever it scrolls off-screen.
 
 import { useEffect, useState } from "react";
 import { ParticleTextEffect } from "@/components/ui/particle-text-effect";
@@ -23,8 +24,8 @@ export function ParticleWords() {
   if (!enabled) return null;
 
   return (
-    <section aria-hidden className="relative mx-auto max-w-4xl px-6 py-10">
+    <div aria-hidden className="relative mx-auto mt-16 max-w-3xl">
       <ParticleTextEffect words={WORDS} className="mx-auto w-full" />
-    </section>
+    </div>
   );
 }

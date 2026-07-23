@@ -9,6 +9,7 @@ import { Marquee } from "../ui/marquee";
 import { useLang } from "@/lib/i18n";
 import { SkillsSphere } from "../skills-sphere";
 import { SkillRadar } from "../ui/skill-radar";
+import { ParticleWords } from "./particle-words";
 
 const MARQUEE = [
   "React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS",
@@ -38,6 +39,9 @@ export function Skills() {
       </div>
 
       <SkillRadar />
+
+      {/* the tool names, cycled as particles */}
+      <ParticleWords />
     </section>
   );
 }
