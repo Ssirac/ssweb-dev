@@ -5,21 +5,12 @@
 // was removed on request.
 
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa6";
+import { FaWhatsapp } from "react-icons/fa";
 import { SectionHeader } from "../ui/section-header";
-import { Magnetic } from "../ui/magnetic";
 import { AvailabilityBadge } from "../ui/availability-badge";
+import { ClipPathLinks } from "../ui/clip-path-links";
 import { PROFILE } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
-
-const SOCIALS = [
-  { icon: FaWhatsapp, href: `https://wa.me/${PROFILE.whatsapp[0].number}`, label: "WhatsApp" },
-  { icon: FaInstagram, href: PROFILE.socials.instagram, label: "Instagram" },
-  { icon: FaTiktok, href: PROFILE.socials.tiktok, label: "TikTok" },
-  { icon: FaGithub, href: PROFILE.socials.github, label: "GitHub" },
-  { icon: FaLinkedin, href: PROFILE.socials.linkedin, label: "LinkedIn" },
-];
 
 export function Contact() {
   const { t } = useLang();
@@ -63,21 +54,9 @@ export function Contact() {
           <AvailabilityBadge />
         </div>
 
-        <div className="mt-8 flex gap-3">
-          {SOCIALS.map((s) => (
-            <Magnetic key={s.label}>
-              <a
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                data-cursor
-                className="flex h-11 w-11 items-center justify-center rounded-xl glass text-muted transition hover:border-primary/40 hover:text-primary hover:shadow-glow"
-              >
-                <s.icon size={18} />
-              </a>
-            </Magnetic>
-          ))}
+        {/* clip-path hover links: the indigo layer wipes in from the cursor's edge */}
+        <div className="mt-8">
+          <ClipPathLinks />
         </div>
       </motion.div>
     </section>
