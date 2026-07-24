@@ -4,10 +4,10 @@
 // with GSAP ScrollTrigger (scroll-hijack) and spins a full 360deg circle;
 // this rebuild keeps the buried-wheel look but drives a GENTLE sweep from
 // Framer Motion's useScroll -> motion values (compositor transforms, spring
-// smoothed). No pin, no scroll lock, no per-frame React state, so the page
-// keeps scrolling normally. Cards counter-rotate to stay upright and readable.
+// smoothed). No pin, no scroll lock, no per-frame React state. Cards fan out
+// from a pivot at the bottom of the band and counter-rotate to stay upright.
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
@@ -16,15 +16,20 @@ import { PROJECTS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-// gentle sweep range (deg) as the section scrolls through the viewport
-const SWEEP = 22;
-// how far apart the cards fan across the top of the wheel
-const FAN_STEP = 40;
+const SWEEP = 18; // gentle rotation range (deg) across the scroll
 
 export function RadialGallery() {
   const { t, lang } = useLang();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<number | null>(null);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -35,6 +40,10 @@ export function RadialGallery() {
   const counterRotate = useTransform(wheelRotate, (r) => -r);
 
   const n = PROJECTS.length;
+  const R = mobile ? 150 : 300; // circle radius (px)
+  const fanStep = mobile ? 34 : 40; // degrees between cards
+  const cardW = mobile ? 140 : 210;
+  const cardH = mobile ? 190 : 285;
 
   return (
     <section
@@ -42,7 +51,7 @@ export function RadialGallery() {
       id="projects"
       className="section-anchor relative mx-auto max-w-6xl overflow-hidden px-6 py-24"
     >
-      <div className="mb-4 text-center">
+      <div className="mb-6 text-center">
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">{t.projects.tag}</span>
         <h2 className="mx-auto mt-3 max-w-3xl font-display text-4xl font-bold tracking-tight text-ink md:text-5xl">
           {t.projects.title}
@@ -50,22 +59,18 @@ export function RadialGallery() {
         <p className="mx-auto mt-4 max-w-xl text-muted">{t.projects.subtitle}</p>
       </div>
 
-      {/* buried wheel: only the top band shows, faded at the bottom */}
-      <div
-        className="relative h-[420px] w-full [mask-image:linear-gradient(to_top,transparent_2%,black_28%)] [-webkit-mask-image:linear-gradient(to_top,transparent_2%,black_28%)] sm:h-[500px]"
-      >
+      {/* the band: cards fan up from a pivot at its bottom, faded at the edge */}
+      <div className="relative h-[360px] w-full [mask-image:linear-gradient(to_top,transparent_0%,black_22%)] [-webkit-mask-image:linear-gradient(to_top,transparent_0%,black_22%)] sm:h-[430px]">
+        {/* pivot point at bottom center; the wheel rotates around it */}
         <motion.div
           style={{ rotate: wheelRotate }}
-          className="absolute left-1/2 top-full h-[520px] w-[520px] -translate-x-1/2 will-change-transform sm:h-[720px] sm:w-[720px]"
+          className="absolute bottom-0 left-1/2 h-0 w-0 will-change-transform"
         >
           {PROJECTS.map((p, i) => {
-            // fan the cards across the top of the circle, centered straight up
-            const aDeg = (i - (n - 1) / 2) * FAN_STEP;
+            const aDeg = (i - (n - 1) / 2) * fanStep;
             const aRad = (aDeg * Math.PI) / 180;
-            // radius = half the wheel width (responsive via the wheel size)
-            const rPct = 50; // percent of the wheel box
-            const x = rPct * Math.sin(aRad);
-            const y = -rPct * Math.cos(aRad);
+            const x = R * Math.sin(aRad);
+            const y = -R * Math.cos(aRad);
             const isHovered = hovered === i;
             const dim = hovered !== null && !isHovered;
             const label = t.projects.categories[p.category];
@@ -73,9 +78,9 @@ export function RadialGallery() {
             return (
               <div
                 key={p.slug}
-                className="absolute left-1/2 top-1/2"
+                className="absolute left-0 top-0"
                 style={{
-                  transform: `translate(-50%, -50%) translate(${x}%, ${y}%)`,
+                  transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
                   zIndex: isHovered ? 30 : 10,
                 }}
               >
@@ -87,8 +92,9 @@ export function RadialGallery() {
                     onFocus={() => setHovered(i)}
                     onBlur={() => setHovered(null)}
                     data-cursor
+                    style={{ width: cardW, height: cardH }}
                     className={cn(
-                      "group relative block h-[240px] w-[180px] overflow-hidden rounded-2xl border border-ink/10 shadow-premium transition-all duration-500 ease-out sm:h-[300px] sm:w-[220px]",
+                      "group relative block overflow-hidden rounded-2xl border border-ink/10 shadow-premium transition-all duration-500 ease-out",
                       isHovered ? "-translate-y-3 scale-105" : "scale-100",
                       dim ? "opacity-40 blur-[2px] grayscale" : "opacity-100",
                     )}
@@ -97,10 +103,12 @@ export function RadialGallery() {
                       src={p.image}
                       alt={p.title}
                       fill
-                      sizes="220px"
+                      sizes="210px"
                       className={cn(
-                        "object-cover transition-transform duration-700",
-                        "fit" in p && p.fit === "contain" ? "object-contain bg-background/70" : "object-top",
+                        "transition-transform duration-700",
+                        "fit" in p && p.fit === "contain"
+                          ? "object-contain bg-background/70"
+                          : "object-cover object-top",
                         isHovered ? "scale-110" : "scale-100 grayscale-[25%]",
                       )}
                     />
@@ -121,7 +129,7 @@ export function RadialGallery() {
                         </span>
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold leading-tight text-ink">{p.title}</h3>
+                        <h3 className="text-base font-bold leading-tight text-ink sm:text-lg">{p.title}</h3>
                         <div
                           className={cn(
                             "mt-2 h-0.5 bg-primary transition-all duration-500",
@@ -138,7 +146,7 @@ export function RadialGallery() {
         </motion.div>
       </div>
 
-      <div className="mt-6 flex justify-center">
+      <div className="mt-4 flex justify-center">
         <Link
           href="/projects"
           data-cursor
