@@ -3,7 +3,7 @@ import { About } from "@/components/sections/about";
 import { CodeShowcase } from "@/components/sections/code-showcase";
 import { Skills } from "@/components/sections/skills";
 import { Services } from "@/components/sections/services";
-import { Projects } from "@/components/sections/projects";
+import { RadialGallery } from "@/components/ui/radial-gallery";
 import { Testimonials } from "@/components/sections/testimonials";
 import { GithubStats } from "@/components/sections/github";
 import { RunnerGame } from "@/components/sections/runner-game";
@@ -18,7 +18,7 @@ export default function Home() {
       <CodeShowcase />
       <Skills />
       <Services />
-      <Projects />
+      <RadialGallery />
       <Testimonials />
       <GithubStats />
       <RunnerGame />
